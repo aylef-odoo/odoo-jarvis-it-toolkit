@@ -1,0 +1,6 @@
+id,partner_id/id,acc_number
+__export__.bank_it_b2b,__export__.res_partner_it_b2b,IT89R0123412345123456789012
+__export__.bank_it_b2c,__export__.res_partner_it_b2c,IT12A3456789012345678901234
+__export__.bank_it_pa,__export__.res_partner_it_pa,IT98Z7654321098765432109876
+__export__.bank_eu_b2b,__export__.res_partner_eu_b2b,DE12345678901234567890
+__export__.bank_extraeu_b2b,__export__.res_partner_extraeu_b2b,US1234567890987654321
