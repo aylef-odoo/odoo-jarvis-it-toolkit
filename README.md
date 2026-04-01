@@ -6,7 +6,7 @@ The data covers various types of master data and documents, including complex sc
 
 ## 📋 Prerequisites
 
-* Odoo (version 14 or higher recommended).
+* Odoo (version 19 or higher recommended).
 * **Accounting** or **Invoicing** app installed.
 * Italian localization package installed (`l10n_it`), which generates the standard chart of accounts and VAT registers.
 
