@@ -1,0 +1,7 @@
+id,name,is_company,street,zip,city,country_id/id,phone,email,vat,l10n_it_codice_fiscale,l10n_it_pa_index
+__export__.res_partner_it_b2b,"Azienda IT B2B SRL",True,"Via Roma 10",00100,"Roma",base.it,+39061234567,amministrazione@aziendait.com,IT01234560157,01234560157,M5UXCR1
+__export__.res_partner_it_b2c,"Mario Rossi",False,"Via Milano 20",20124,"Milano",base.it,+393331234567,mario.rossi@email.it,,RSSMRA80A01F205X,0000000
+__export__.res_partner_eu_b2c,"Hans Schmidt",False,"Hauptstrasse 1",10115,"Berlin",base.de,+491511234567,hans.schmidt@email.de,/,,XXXXXXX
+__export__.res_partner_eu_b2b,"EU Company GmbH",True,"Friedrichstrasse 100",10117,"Berlin",base.de,+4930123456,billing@eucompany.de,DE791515202,,XXXXXXX
+__export__.res_partner_extraeu,"US Corp Inc.",True,"123 Broadway",10001,"New York",base.us,+12125550199,accounts@uscorp.com,OO99999999999,,XXXXXXX
+__export__.res_partner_it_pa,"Comune di Milano",True,"Piazza della Scala 2",20121,"Milano",base.it,+390288451,protocollo@pec.comune.milano.it,IT01199250158,01199250158,UFJ9DC
