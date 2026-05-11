@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FatturaPA Generator — Test XML per Odoo</title>
+        <title>SDI e-invoice Generator — Test XML per Odoo</title>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
             * {
@@ -498,7 +498,7 @@
                 <div>
                     <div class="logo">
                         <div class="badge">FE</div>
-                        <h1>FatturaPA Generator</h1>
+                        <h1>SDI e-invoice Generator</h1>
                     </div>
                     <p class="sub">
                         Genera file XML di test per import in Odoo
@@ -1069,8 +1069,7 @@
 
             function syncTrasmittente() {
                 document.getElementById("idCodice").value =
-                    document.getElementById("ced_piva").value ||
-                    "12345678901";
+                    document.getElementById("ced_piva").value || "12345678901";
             }
 
             function fillPartner(pre, data) {
@@ -1214,7 +1213,7 @@
                     : "";
 
                 return `<?xml version="1.0" encoding="UTF-8"?>
-<p:FatturaElettronica versione="FPR12" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2 http://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.2/Schema_del_file_xml_FatturaPA_versione_1.2.xsd">
+<p:FatturaElettronica versione="FPR12" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2 http://www.SDI e-invoice.gov.it/export/fatturazione/sdi/SDI e-invoice/v1.2/Schema_del_file_xml_SDI e-invoice_versione_1.2.xsd">
   <FatturaElettronicaHeader>
     <DatiTrasmissione>
       <IdTrasmittente>
