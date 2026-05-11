@@ -1057,19 +1057,20 @@
                     .classList.toggle("active", m === "passive");
 
                 if (m === "active") {
-                    fillPartner("ces", US);
-                    fillPartner("ced", PARTNERS[0]);
-                    document.getElementById("idCodice").value =
-                        document.getElementById("ced_piva").value ||
-                        "12345678901";
-                } else {
                     fillPartner("ced", US);
                     fillPartner("ces", PARTNERS[0]);
-                    document.getElementById("idCodice").value =
-                        document.getElementById("ced_piva").value ||
-                        "12345678901";
+                } else {
+                    fillPartner("ces", US);
+                    fillPartner("ced", PARTNERS[0]);
                 }
+                syncTrasmittente();
                 upS();
+            }
+
+            function syncTrasmittente() {
+                document.getElementById("idCodice").value =
+                    document.getElementById("ced_piva").value ||
+                    "12345678901";
             }
 
             function fillPartner(pre, data) {
@@ -1088,8 +1089,7 @@
             function magicSeller() {
                 const p = PARTNERS[Math.floor(Math.random() * PARTNERS.length)];
                 fillPartner("ced", p);
-                if (MODE === "active")
-                    document.getElementById("idCodice").value = p.piva || p.cf;
+                syncTrasmittente();
                 upS();
             }
 
@@ -1289,6 +1289,7 @@ ${rx}
             }
 
             function dlXML() {
+                syncTrasmittente();
                 const xml = genXML(),
                     fn = `${gv("idPaese")}${gv("idCodice")}_${gv("prog")}.xml`;
                 const a = document.createElement("a");
