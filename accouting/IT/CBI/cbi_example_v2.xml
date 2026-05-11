@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  CBI SEPA Credit Transfer v.00.04.01
+  Basato su pain.001.001.09 (NON su .03 come la v.00.04.00 precedente)
+
+  Differenze chiave rispetto al pain.001.001.03:
+    - ReqdExctnDt è una choice strutturata: contiene <Dt> oppure <DtTm>
+    - BIC rinominato in BICFI
+    - PmtTpInf sequence: InstrPrty -> SvcLvl -> LclInstrm -> CtgyPurp
+    - NbOfTxs e CtrlSum NON presenti in PmtInf (subset CBI)
+    - Un solo PmtInf per file (vincolo CBI)
+-->
+<CBIBdyPaymentRequest
+    xmlns="urn:CBI:xsd:CBIBdyPaymentRequest.00.04.01"
+    xmlns:pmrq="urn:CBI:xsd:CBIPaymentRequest.00.04.01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+  <CBIEnvelPaymentRequest>
+    <CBIPaymentRequest>
+
+      <pmrq:GrpHdr>
+        <pmrq:MsgId>FLOUS-20260507-0001</pmrq:MsgId>
+        <pmrq:CreDtTm>2026-05-07T14:30:00</pmrq:CreDtTm>
+        <pmrq:NbOfTxs>4</pmrq:NbOfTxs>
+        <pmrq:CtrlSum>4250.50</pmrq:CtrlSum>
+        <pmrq:InitgPty>
+          <pmrq:Nm>Acme Italia S.r.l.</pmrq:Nm>
+          <pmrq:Id>
+            <pmrq:OrgId>
+              <pmrq:Othr>
+                <pmrq:Id>ACME0001</pmrq:Id>
+                <pmrq:Issr>CBI</pmrq:Issr>
+              </pmrq:Othr>
+            </pmrq:OrgId>
+          </pmrq:Id>
+        </pmrq:InitgPty>
+      </pmrq:GrpHdr>
+
+      <pmrq:PmtInf>
+        <pmrq:PmtInfId>FLOUS-PMT-001</pmrq:PmtInfId>
+        <pmrq:PmtMtd>TRF</pmrq:PmtMtd>
+        <pmrq:BtchBookg>false</pmrq:BtchBookg>
+        <pmrq:PmtTpInf>
+          <pmrq:InstrPrty>NORM</pmrq:InstrPrty>
+          <pmrq:SvcLvl>
+            <pmrq:Cd>SEPA</pmrq:Cd>
+          </pmrq:SvcLvl>
+          <pmrq:LclInstrm>
+            <pmrq:Cd>SEPA</pmrq:Cd>
+          </pmrq:LclInstrm>
+        </pmrq:PmtTpInf>
+        <pmrq:ReqdExctnDt>
+          <pmrq:Dt>2026-05-15</pmrq:Dt>
+        </pmrq:ReqdExctnDt>
+        <pmrq:Dbtr>
+          <pmrq:Nm>Acme Italia S.r.l.</pmrq:Nm>
+          <pmrq:PstlAdr>
+            <pmrq:Ctry>IT</pmrq:Ctry>
+            <pmrq:AdrLine>Via Roma 10</pmrq:AdrLine>
+            <pmrq:AdrLine>20121 Milano</pmrq:AdrLine>
+          </pmrq:PstlAdr>
+          <pmrq:Id>
+            <pmrq:OrgId>
+              <pmrq:Othr>
+                <pmrq:Id>12345678901</pmrq:Id>
+                <pmrq:Issr>CBI</pmrq:Issr>
+              </pmrq:Othr>
+            </pmrq:OrgId>
+          </pmrq:Id>
+        </pmrq:Dbtr>
+        <pmrq:DbtrAcct>
+          <pmrq:Id>
+            <pmrq:IBAN>IT60X0542811101000000123456</pmrq:IBAN>
+          </pmrq:Id>
+        </pmrq:DbtrAcct>
+        <pmrq:DbtrAgt>
+          <pmrq:FinInstnId>
+            <pmrq:ClrSysMmbId>
+              <pmrq:MmbId>05428</pmrq:MmbId>
+            </pmrq:ClrSysMmbId>
+          </pmrq:FinInstnId>
+        </pmrq:DbtrAgt>
+        <pmrq:ChrgBr>SLEV</pmrq:ChrgBr>
+
+        <!-- Transazione 1 -->
+        <pmrq:CdtTrfTxInf>
+          <pmrq:PmtId>
+            <pmrq:InstrId>FLOUS-TX-001</pmrq:InstrId>
+            <pmrq:EndToEndId>FATT-2026-00145</pmrq:EndToEndId>
+          </pmrq:PmtId>
+          <pmrq:Amt>
+            <pmrq:InstdAmt Ccy="EUR">1250.00</pmrq:InstdAmt>
+          </pmrq:Amt>
+          <pmrq:CdtrAgt>
+            <pmrq:FinInstnId>
+              <pmrq:BICFI>UNCRITMM</pmrq:BICFI>
+            </pmrq:FinInstnId>
+          </pmrq:CdtrAgt>
+          <pmrq:Cdtr>
+            <pmrq:Nm>Fornitore Hardware S.p.A.</pmrq:Nm>
+            <pmrq:PstlAdr>
+              <pmrq:Ctry>IT</pmrq:Ctry>
+              <pmrq:AdrLine>Via Torino 25</pmrq:AdrLine>
+              <pmrq:AdrLine>10121 Torino</pmrq:AdrLine>
+            </pmrq:PstlAdr>
+          </pmrq:Cdtr>
+          <pmrq:CdtrAcct>
+            <pmrq:Id>
+              <pmrq:IBAN>IT45R0200801600000005123789</pmrq:IBAN>
+            </pmrq:Id>
+          </pmrq:CdtrAcct>
+          <pmrq:RmtInf>
+            <pmrq:Ustrd>Pagamento fattura n. 145 del 30/04/2026</pmrq:Ustrd>
+          </pmrq:RmtInf>
+        </pmrq:CdtTrfTxInf>
+
+        <!-- Transazione 2 -->
+        <pmrq:CdtTrfTxInf>
+          <pmrq:PmtId>
+            <pmrq:InstrId>FLOUS-TX-002</pmrq:InstrId>
+            <pmrq:EndToEndId>FATT-2026-00146</pmrq:EndToEndId>
+          </pmrq:PmtId>
+          <pmrq:Amt>
+            <pmrq:InstdAmt Ccy="EUR">500.00</pmrq:InstdAmt>
+          </pmrq:Amt>
+          <pmrq:CdtrAgt>
+            <pmrq:FinInstnId>
+              <pmrq:BICFI>BCITITMM</pmrq:BICFI>
+            </pmrq:FinInstnId>
+          </pmrq:CdtrAgt>
+          <pmrq:Cdtr>
+            <pmrq:Nm>Servizi Cloud S.r.l.</pmrq:Nm>
+            <pmrq:PstlAdr>
+              <pmrq:Ctry>IT</pmrq:Ctry>
+              <pmrq:AdrLine>Via Milano 8</pmrq:AdrLine>
+              <pmrq:AdrLine>00184 Roma</pmrq:AdrLine>
+            </pmrq:PstlAdr>
+          </pmrq:Cdtr>
+          <pmrq:CdtrAcct>
+            <pmrq:Id>
+              <pmrq:IBAN>IT88L0306905020100000067890</pmrq:IBAN>
+            </pmrq:Id>
+          </pmrq:CdtrAcct>
+          <pmrq:RmtInf>
+            <pmrq:Ustrd>Canone hosting maggio 2026 - fatt. 146</pmrq:Ustrd>
+          </pmrq:RmtInf>
+        </pmrq:CdtTrfTxInf>
+
+        <!-- Transazione 3 -->
+        <pmrq:CdtTrfTxInf>
+          <pmrq:PmtId>
+            <pmrq:InstrId>FLOUS-TX-003</pmrq:InstrId>
+            <pmrq:EndToEndId>FATT-2026-00147</pmrq:EndToEndId>
+          </pmrq:PmtId>
+          <pmrq:Amt>
+            <pmrq:InstdAmt Ccy="EUR">1450.50</pmrq:InstdAmt>
+          </pmrq:Amt>
+          <pmrq:Cdtr>
+            <pmrq:Nm>Studio Legale Rossi</pmrq:Nm>
+          </pmrq:Cdtr>
+          <pmrq:CdtrAcct>
+            <pmrq:Id>
+              <pmrq:IBAN>IT12A0200811211000005432198</pmrq:IBAN>
+            </pmrq:Id>
+          </pmrq:CdtrAcct>
+          <pmrq:RmtInf>
+            <pmrq:Ustrd>Onorario consulenza legale aprile 2026</pmrq:Ustrd>
+          </pmrq:RmtInf>
+        </pmrq:CdtTrfTxInf>
+
+        <!-- Transazione 4 -->
+        <pmrq:CdtTrfTxInf>
+          <pmrq:PmtId>
+            <pmrq:InstrId>FLOUS-TX-004</pmrq:InstrId>
+            <pmrq:EndToEndId>FATT-2026-00148</pmrq:EndToEndId>
+          </pmrq:PmtId>
+          <pmrq:Amt>
+            <pmrq:InstdAmt Ccy="EUR">1050.00</pmrq:InstdAmt>
+          </pmrq:Amt>
+          <pmrq:Cdtr>
+            <pmrq:Nm>Ufficio Forniture S.r.l.</pmrq:Nm>
+          </pmrq:Cdtr>
+          <pmrq:CdtrAcct>
+            <pmrq:Id>
+              <pmrq:IBAN>IT77B0306902115100000098765</pmrq:IBAN>
+            </pmrq:Id>
+          </pmrq:CdtrAcct>
+          <pmrq:RmtInf>
+            <pmrq:Ustrd>Fornitura cancelleria fatt. 148</pmrq:Ustrd>
+          </pmrq:RmtInf>
+        </pmrq:CdtTrfTxInf>
+
+      </pmrq:PmtInf>
+
+    </CBIPaymentRequest>
+  </CBIEnvelPaymentRequest>
+</CBIBdyPaymentRequest>

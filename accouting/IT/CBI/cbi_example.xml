@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CBIPaymentRequest xmlns="urn:CBI:xsd:CBIPaymentRequest.00.04.01">
+    <GrpHdr>
+        <MsgId>MSG-UNICO-20260421-001</MsgId>
+        <CreDtTm>2026-04-21T16:00:00Z</CreDtTm>
+        <NbOfTxs>3</NbOfTxs> <CtrlSum>5250.00</CtrlSum>
+        <InitgPty>
+            <Nm>AZIENDA ALPHA SRL</Nm>
+            <Id>
+                <OrgId>
+                    <Othr>
+                        <Id>CUC12345</Id>
+                        <Issr>CBI</Issr>
+                    </Othr>
+                </OrgId>
+            </Id>
+        </InitgPty>
+    </GrpHdr>
+
+    <PmtInf>
+        <PmtInfId>PMT-RAGGRUPPATO-01</PmtInfId>
+        <PmtMtd>TRF</PmtMtd>
+        <PmtTpInf>
+            <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+            <LclInstrm><Cd>TRF</Cd></LclInstrm>
+            </PmtTpInf>
+
+        <ReqdExctnDt>
+            <Dt>2026-04-22</Dt> </ReqdExctnDt>
+
+        <Dbtr>
+            <Nm>AZIENDA ALPHA SRL</Nm>
+            <PstlAdr>
+                <StrtNm>Via Roma</StrtNm><BldgNb>10</BldgNb><PstCd
+                >00100</PstCd><TwnNm>Roma</TwnNm><Ctry>IT</Ctry>
+            </PstlAdr>
+            <Id><OrgId><Othr><Id>IT01234567890</Id><Issr
+                        >TXID</Issr></Othr></OrgId></Id>
+        </Dbtr>
+
+        <DbtrAcct>
+            <Id><IBAN>IT99A0123456789012345678901</IBAN></Id>
+        </DbtrAcct>
+
+        <DbtrAgt>
+            <FinInstnId>
+                <BICFI>BANCITMMXXX</BICFI>
+                <ClrSysMmbId><MmbId>01234</MmbId></ClrSysMmbId>
+            </FinInstnId>
+        </DbtrAgt>
+
+        <CdtTrfTxInf>
+            <PmtId><InstrId>INS-001</InstrId><EndToEndId
+                >E2E-FORN-A</EndToEndId></PmtId>
+            <Amt><InstdAmt Ccy="EUR">1500.00</InstdAmt></Amt>
+            <Cdtr>
+                <Nm>FORNITORE A SAS</Nm>
+                <PstlAdr><StrtNm>Via Milano</StrtNm><BldgNb>5</BldgNb><PstCd
+                    >20100</PstCd><TwnNm>Milano</TwnNm><Ctry>IT</Ctry></PstlAdr>
+            </Cdtr>
+            <CdtrAcct><Id><IBAN
+                    >IT11A0111122222333334444455</IBAN></Id></CdtrAcct>
+            <RmtInf><Ustrd>Fattura 45</Ustrd></RmtInf>
+        </CdtTrfTxInf>
+
+        <CdtTrfTxInf>
+            <PmtId><InstrId>INS-002</InstrId><EndToEndId
+                >E2E-FORN-B</EndToEndId></PmtId>
+            <Amt><InstdAmt Ccy="EUR">750.00</InstdAmt></Amt>
+            <Cdtr>
+                <Nm>FORNITORE B SRL</Nm>
+                <PstlAdr><StrtNm>Via Napoli</StrtNm><BldgNb>22</BldgNb><PstCd
+                    >80100</PstCd><TwnNm>Napoli</TwnNm><Ctry>IT</Ctry></PstlAdr>
+            </Cdtr>
+            <CdtrAcct><Id><IBAN
+                    >IT22B0222233333444445555566</IBAN></Id></CdtrAcct>
+            <RmtInf><Ustrd>Acconto aprile</Ustrd></RmtInf>
+        </CdtTrfTxInf>
+
+        <CdtTrfTxInf>
+            <PmtId><InstrId>INS-003</InstrId><EndToEndId
+                >E2E-STIP-ROSSI</EndToEndId></PmtId>
+            <Amt><InstdAmt Ccy="EUR">3000.00</InstdAmt></Amt>
+            <Cdtr>
+                <Nm>MARIO ROSSI</Nm>
+                <PstlAdr><StrtNm>Via Lavoro</StrtNm><BldgNb>1</BldgNb><PstCd
+                    >00100</PstCd><TwnNm>Roma</TwnNm><Ctry>IT</Ctry></PstlAdr>
+            </Cdtr>
+            <CdtrAcct><Id><IBAN
+                    >IT33C0333344444555556666677</IBAN></Id></CdtrAcct>
+            <Purp><Cd>SALA</Cd></Purp>
+            <RmtInf><Ustrd>Emolumenti Aprile</Ustrd></RmtInf>
+        </CdtTrfTxInf>
+
+    </PmtInf>
+</CBIPaymentRequest>
