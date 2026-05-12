@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Province → Odoo state_id/id</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@1,500&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+        <style>
+            :root {
+                --bg: #f5f2ea;
+                --bg-elev: #faf8f3;
+                --fg: #1a1a1a;
+                --muted: #6b6760;
+                --border: #d8d2c4;
+                --border-strong: #b8b0a0;
+                --accent: #2d5d3e;
+                --accent-hover: #224a31;
+                --accent-soft: #e8efe9;
+                --success: #2d5d3e;
+                --warning: #8a5a00;
+                --warning-bg: #fbf3df;
+                --warning-border: #e8d49a;
+                --error: #8b2c1f;
+                --error-bg: #f8e8e4;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                background: var(--bg);
+                color: var(--fg);
+                font-family: "IBM Plex Sans", system-ui, sans-serif;
+                font-size: 15px;
+                line-height: 1.55;
+                -webkit-font-smoothing: antialiased;
+            }
+            body {
+                min-height: 100vh;
+                padding: 3rem 1.25rem 5rem;
+                background-image: radial-gradient(
+                    circle at 1px 1px,
+                    rgba(0, 0, 0, 0.04) 1px,
+                    transparent 0
+                );
+                background-size: 24px 24px;
+            }
+            main {
+                max-width: 760px;
+                margin: 0 auto;
+            }
+            header {
+                margin-bottom: 2.5rem;
+            }
+            .eyebrow {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin: 0 0 0.6rem 0;
+            }
+            h1 {
+                font-family: "IBM Plex Serif", serif;
+                font-style: italic;
+                font-weight: 500;
+                font-size: 2rem;
+                margin: 0 0 0.4rem 0;
+                line-height: 1.15;
+                letter-spacing: -0.01em;
+            }
+            h1 .mono {
+                font-family: "IBM Plex Mono", monospace;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 0.85em;
+                background: var(--fg);
+                color: var(--bg);
+                padding: 1px 8px;
+                border-radius: 3px;
+                letter-spacing: 0;
+            }
+            .subtitle {
+                color: var(--muted);
+                margin: 0;
+                font-size: 0.95rem;
+                max-width: 56ch;
+            }
+            .dropzone {
+                display: block;
+                border: 1.5px dashed var(--border-strong);
+                border-radius: 4px;
+                padding: 3.5rem 1.5rem;
+                text-align: center;
+                cursor: pointer;
+                background: var(--bg-elev);
+                transition: all 0.18s ease;
+                position: relative;
+            }
+            .dropzone:hover {
+                border-color: var(--accent);
+                background: var(--accent-soft);
+            }
+            .dropzone.over {
+                border-color: var(--accent);
+                border-style: solid;
+                background: var(--accent-soft);
+                transform: translateY(-1px);
+            }
+            .dropzone input {
+                display: none;
+            }
+            .dropzone .glyph {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 1.4rem;
+                color: var(--muted);
+                margin-bottom: 0.5rem;
+            }
+            .dropzone p {
+                margin: 0.25rem 0;
+            }
+            .dropzone strong {
+                font-weight: 600;
+            }
+            .dropzone .hint {
+                color: var(--muted);
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.78rem;
+                margin-top: 0.6rem;
+            }
+            .card {
+                background: var(--bg-elev);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                padding: 1.4rem 1.5rem;
+                margin-top: 1.25rem;
+            }
+            .card h2 {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.72rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                color: var(--muted);
+                margin: 0 0 1.1rem 0;
+            }
+            .fields {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 1.2rem;
+            }
+            .field label {
+                display: block;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--muted);
+                margin-bottom: 0.3rem;
+            }
+            .field .value {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.95rem;
+                font-weight: 500;
+                word-break: break-all;
+            }
+            .badge {
+                display: inline-block;
+                padding: 3px 9px;
+                border-radius: 3px;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.78rem;
+                font-weight: 500;
+                letter-spacing: 0.02em;
+                border: 1px solid currentColor;
+            }
+            .badge.code {
+                color: #1d4ed8;
+                background: #e0e9ff;
+                border-color: #b9c9ff;
+            }
+            .badge.name {
+                color: #92400e;
+                background: #fbf0d4;
+                border-color: #e8cf94;
+            }
+            .badge.mixed {
+                color: #831843;
+                background: #fbe1ee;
+                border-color: #f0bcd5;
+            }
+            .badge.empty {
+                color: var(--muted);
+                background: transparent;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.85rem;
+            }
+            table th,
+            table td {
+                padding: 8px 12px;
+                text-align: left;
+            }
+            table th {
+                font-family: "IBM Plex Sans", sans-serif;
+                font-weight: 500;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--muted);
+                border-bottom: 1px solid var(--border-strong);
+                padding-bottom: 6px;
+            }
+            table td {
+                border-bottom: 1px solid var(--border);
+            }
+            table tr:last-child td {
+                border-bottom: none;
+            }
+            .arrow {
+                color: var(--muted);
+                padding: 0 0.4rem;
+                font-family: "IBM Plex Mono", monospace;
+            }
+            .ok {
+                color: var(--success);
+            }
+            .fail {
+                color: var(--error);
+            }
+            .summary {
+                display: flex;
+                gap: 2rem;
+                margin-bottom: 1.2rem;
+                flex-wrap: wrap;
+            }
+            .stat .num {
+                font-family: "IBM Plex Serif", serif;
+                font-style: italic;
+                font-weight: 500;
+                font-size: 2.2rem;
+                line-height: 1;
+            }
+            .stat .label {
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--muted);
+                margin-top: 0.35rem;
+            }
+            .stat.ok .num {
+                color: var(--success);
+            }
+            .stat.warn .num {
+                color: var(--warning);
+            }
+            button {
+                font-family: "IBM Plex Sans", sans-serif;
+                background: var(--accent);
+                color: white;
+                border: none;
+                padding: 11px 22px;
+                border-radius: 3px;
+                font-size: 0.92rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition:
+                    background 0.15s,
+                    transform 0.05s;
+                letter-spacing: 0.01em;
+            }
+            button:hover {
+                background: var(--accent-hover);
+            }
+            button:active {
+                transform: translateY(1px);
+            }
+            button.secondary {
+                background: transparent;
+                color: var(--fg);
+                border: 1px solid var(--border-strong);
+            }
+            button.secondary:hover {
+                background: var(--bg);
+                border-color: var(--fg);
+            }
+            .actions {
+                display: flex;
+                gap: 0.6rem;
+                margin-top: 1.2rem;
+                flex-wrap: wrap;
+            }
+            .warnings {
+                background: var(--warning-bg);
+                border: 1px solid var(--warning-border);
+                border-radius: 3px;
+                padding: 0.85rem 1rem;
+                color: var(--warning);
+                font-size: 0.88rem;
+                margin-top: 1rem;
+            }
+            .warnings strong {
+                display: block;
+                margin-bottom: 0.45rem;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.78rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+            .warnings ul {
+                margin: 0;
+                padding-left: 1.1rem;
+                max-height: 180px;
+                overflow-y: auto;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.82rem;
+            }
+            .warnings li {
+                margin: 2px 0;
+            }
+            .warnings code {
+                background: rgba(0, 0, 0, 0.06);
+                padding: 1px 5px;
+                border-radius: 2px;
+            }
+            .error-card {
+                background: var(--error-bg);
+                border: 1px solid #d9b3aa;
+                color: var(--error);
+            }
+            .error-card h2 {
+                color: var(--error);
+            }
+            .select-row {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                flex-wrap: wrap;
+            }
+            select {
+                font-family: "IBM Plex Mono", monospace;
+                padding: 8px 12px;
+                border: 1px solid var(--border-strong);
+                border-radius: 3px;
+                background: white;
+                font-size: 0.88rem;
+                color: var(--fg);
+                cursor: pointer;
+            }
+            select:focus {
+                outline: 2px solid var(--accent);
+                outline-offset: 1px;
+            }
+            footer {
+                margin: 4rem auto 0;
+                max-width: 760px;
+                text-align: center;
+                color: var(--muted);
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.75rem;
+            }
+            footer code {
+                background: rgba(0, 0, 0, 0.05);
+                padding: 2px 6px;
+                border-radius: 2px;
+            }
+            .divider {
+                border: none;
+                border-top: 1px solid var(--border);
+                margin: 1.2rem 0;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <header>
+                <p class="eyebrow">Tool — Odoo Import Helper</p>
+                <h1>Province → <span class="mono">state_id/id</span></h1>
+                <p class="subtitle">
+                    Carica un CSV o Excel: rilevo la colonna provincia, capisco
+                    se è in sigla o nome esteso, e la converto negli external ID
+                    Odoo (<code
+                        style="
+                            font-family: &quot;IBM Plex Mono&quot;, monospace;
+                        "
+                        >base.state_it_xx</code
+                    >).
+                </p>
+            </header>
+
+            <label class="dropzone" id="dropzone" for="fileInput">
+                <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" />
+                <div class="glyph">↓</div>
+                <p><strong>Clicca o trascina qui un file</strong></p>
+                <p class="hint">
+                    .csv · .xlsx · .xls — tutto in locale, nessun upload
+                </p>
+            </label>
+
+            <div id="results"></div>
+        </main>
+
+        <footer>
+            <p>
+                L'elaborazione avviene interamente nel browser.
+                <code>base.state_it_*</code> sono gli external ID nativi del
+                modulo <code>base</code> di Odoo.
+            </p>
+        </footer>
+
+        <script>
+            // ---- Province data ----------------------------------------------------------
+
+            const PROVINCE_CODES = [
+                "AG",
+                "AL",
+                "AN",
+                "AO",
+                "AR",
+                "AP",
+                "AT",
+                "AV",
+                "BA",
+                "BT",
+                "BL",
+                "BN",
+                "BG",
+                "BI",
+                "BO",
+                "BZ",
+                "BS",
+                "BR",
+                "CA",
+                "CL",
+                "CB",
+                "CE",
+                "CT",
+                "CZ",
+                "CH",
+                "CO",
+                "CS",
+                "CR",
+                "KR",
+                "CN",
+                "EN",
+                "FM",
+                "FE",
+                "FI",
+                "FG",
+                "FC",
+                "FR",
+                "GE",
+                "GO",
+                "GR",
+                "IM",
+                "IS",
+                "SP",
+                "AQ",
+                "LT",
+                "LE",
+                "LC",
+                "LI",
+                "LO",
+                "LU",
+                "MC",
+                "MN",
+                "MS",
+                "MT",
+                "ME",
+                "MI",
+                "MO",
+                "MB",
+                "NA",
+                "NO",
+                "NU",
+                "OR",
+                "PD",
+                "PA",
+                "PR",
+                "PV",
+                "PG",
+                "PU",
+                "PE",
+                "PC",
+                "PI",
+                "PT",
+                "PN",
+                "PZ",
+                "PO",
+                "RG",
+                "RA",
+                "RC",
+                "RE",
+                "RI",
+                "RN",
+                "RM",
+                "RO",
+                "SA",
+                "SS",
+                "SV",
+                "SI",
+                "SR",
+                "SO",
+                "SU",
+                "TA",
+                "TE",
+                "TR",
+                "TO",
+                "TP",
+                "TN",
+                "TV",
+                "TS",
+                "UD",
+                "VA",
+                "VE",
+                "VB",
+                "VC",
+                "VR",
+                "VV",
+                "VI",
+                "VT",
+            ];
+            const VALID_CODES = new Set(PROVINCE_CODES);
+
+            // Normalized name -> code. Keys are already normalized (lowercase, no accents/apostrophes, dashes→spaces).
+            const NAME_TO_CODE = {
+                agrigento: "AG",
+                alessandria: "AL",
+                ancona: "AN",
+                aosta: "AO",
+                "valle daosta": "AO",
+                "valle d aosta": "AO",
+                arezzo: "AR",
+                "ascoli piceno": "AP",
+                asti: "AT",
+                avellino: "AV",
+                bari: "BA",
+                "barletta andria trani": "BT",
+                barletta: "BT",
+                belluno: "BL",
+                benevento: "BN",
+                bergamo: "BG",
+                biella: "BI",
+                bologna: "BO",
+                bolzano: "BZ",
+                "bolzano bozen": "BZ",
+                bozen: "BZ",
+                sudtirol: "BZ",
+                "alto adige": "BZ",
+                brescia: "BS",
+                brindisi: "BR",
+                cagliari: "CA",
+                caltanissetta: "CL",
+                campobasso: "CB",
+                caserta: "CE",
+                catania: "CT",
+                catanzaro: "CZ",
+                chieti: "CH",
+                como: "CO",
+                cosenza: "CS",
+                cremona: "CR",
+                crotone: "KR",
+                cuneo: "CN",
+                enna: "EN",
+                fermo: "FM",
+                ferrara: "FE",
+                firenze: "FI",
+                foggia: "FG",
+                "forli cesena": "FC",
+                forli: "FC",
+                frosinone: "FR",
+                genova: "GE",
+                gorizia: "GO",
+                grosseto: "GR",
+                imperia: "IM",
+                isernia: "IS",
+                "la spezia": "SP",
+                laquila: "AQ",
+                aquila: "AQ",
+                "l aquila": "AQ",
+                latina: "LT",
+                lecce: "LE",
+                lecco: "LC",
+                livorno: "LI",
+                lodi: "LO",
+                lucca: "LU",
+                macerata: "MC",
+                mantova: "MN",
+                "massa carrara": "MS",
+                "massa e carrara": "MS",
+                massa: "MS",
+                matera: "MT",
+                messina: "ME",
+                milano: "MI",
+                modena: "MO",
+                "monza e brianza": "MB",
+                "monza brianza": "MB",
+                "monza e della brianza": "MB",
+                monza: "MB",
+                napoli: "NA",
+                novara: "NO",
+                nuoro: "NU",
+                oristano: "OR",
+                padova: "PD",
+                palermo: "PA",
+                parma: "PR",
+                pavia: "PV",
+                perugia: "PG",
+                "pesaro e urbino": "PU",
+                "pesaro urbino": "PU",
+                pesaro: "PU",
+                pescara: "PE",
+                piacenza: "PC",
+                pisa: "PI",
+                pistoia: "PT",
+                pordenone: "PN",
+                potenza: "PZ",
+                prato: "PO",
+                ragusa: "RG",
+                ravenna: "RA",
+                "reggio calabria": "RC",
+                "reggio di calabria": "RC",
+                "reggio emilia": "RE",
+                "reggio nellemilia": "RE",
+                "reggio nell emilia": "RE",
+                rieti: "RI",
+                rimini: "RN",
+                roma: "RM",
+                rovigo: "RO",
+                salerno: "SA",
+                sassari: "SS",
+                savona: "SV",
+                siena: "SI",
+                siracusa: "SR",
+                sondrio: "SO",
+                "sud sardegna": "SU",
+                taranto: "TA",
+                teramo: "TE",
+                terni: "TR",
+                torino: "TO",
+                trapani: "TP",
+                trento: "TN",
+                treviso: "TV",
+                trieste: "TS",
+                udine: "UD",
+                varese: "VA",
+                venezia: "VE",
+                "verbano cusio ossola": "VB",
+                verbania: "VB",
+                verbano: "VB",
+                vercelli: "VC",
+                verona: "VR",
+                "vibo valentia": "VV",
+                vicenza: "VI",
+                viterbo: "VT",
+            };
+
+            // ---- Helpers ----------------------------------------------------------------
+
+            function normalize(s) {
+                return String(s == null ? "" : s)
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/['`´’ʼ]/g, "")
+                    .replace(/[-_\/.]/g, " ")
+                    .replace(/\s+/g, " ")
+                    .trim();
+            }
+
+            function findProvinceColumn(fields) {
+                const exact = [
+                    /^provincia$/i,
+                    /^province$/i,
+                    /^prov\.?$/i,
+                    /^state$/i,
+                    /^stato$/i,
+                    /^sigla$/i,
+                    /^state_id$/i,
+                ];
+                for (const p of exact) {
+                    const col = fields.find((f) => p.test(String(f).trim()));
+                    if (col) return col;
+                }
+                const partial = [
+                    /provincia/i,
+                    /province/i,
+                    /sigla/i,
+                    /\bprov\b/i,
+                ];
+                for (const p of partial) {
+                    const col = fields.find((f) => p.test(String(f)));
+                    if (col) return col;
+                }
+                return null;
+            }
+
+            function detectFormat(values) {
+                const nonEmpty = values.filter(
+                    (v) => v != null && String(v).trim(),
+                );
+                if (!nonEmpty.length) return "empty";
+                let codeCount = 0;
+                for (const v of nonEmpty) {
+                    if (/^[A-Za-z]{2}$/.test(String(v).trim())) codeCount++;
+                }
+                const ratio = codeCount / nonEmpty.length;
+                if (ratio > 0.8) return "code";
+                if (ratio < 0.2) return "name";
+                return "mixed";
+            }
+
+            function toExternalId(value) {
+                if (value == null) return { ok: false, ext: "" };
+                const trimmed = String(value).trim();
+                if (!trimmed) return { ok: false, ext: "" };
+
+                // Try as 2-letter code
+                if (/^[A-Za-z]{2}$/.test(trimmed)) {
+                    const code = trimmed.toUpperCase();
+                    if (VALID_CODES.has(code)) {
+                        return {
+                            ok: true,
+                            ext: `base.state_it_${code.toLowerCase()}`,
+                        };
+                    }
+                }
+
+                // Try as name (normalized)
+                const norm = normalize(trimmed);
+                if (NAME_TO_CODE[norm]) {
+                    return {
+                        ok: true,
+                        ext: `base.state_it_${NAME_TO_CODE[norm].toLowerCase()}`,
+                    };
+                }
+
+                return { ok: false, ext: "" };
+            }
+
+            function escapeHtml(s) {
+                return String(s == null ? "" : s)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            // ---- State & DOM ------------------------------------------------------------
+
+            let currentFile = null;
+            let currentData = null;
+            let currentFields = null;
+            let currentFormat = null;
+
+            const dropzone = document.getElementById("dropzone");
+            const fileInput = document.getElementById("fileInput");
+            const resultsEl = document.getElementById("results");
+
+            dropzone.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropzone.classList.add("over");
+            });
+            dropzone.addEventListener("dragleave", () =>
+                dropzone.classList.remove("over"),
+            );
+            dropzone.addEventListener("drop", (e) => {
+                e.preventDefault();
+                dropzone.classList.remove("over");
+                if (e.dataTransfer.files[0])
+                    handleFile(e.dataTransfer.files[0]);
+            });
+            fileInput.addEventListener("change", (e) => {
+                if (e.target.files[0]) handleFile(e.target.files[0]);
+            });
+
+            async function handleFile(file) {
+                currentFile = file;
+                resultsEl.innerHTML = "";
+                const ext = file.name.split(".").pop().toLowerCase();
+                try {
+                    if (ext === "csv") {
+                        const text = await file.text();
+                        const parsed = Papa.parse(text, {
+                            header: true,
+                            skipEmptyLines: true,
+                        });
+                        if (parsed.errors && parsed.errors.length) {
+                            console.warn("CSV parse warnings:", parsed.errors);
+                        }
+                        currentData = parsed.data;
+                        currentFields = parsed.meta.fields || [];
+                        currentFormat = "csv";
+                    } else if (["xlsx", "xls"].includes(ext)) {
+                        const buf = await file.arrayBuffer();
+                        const wb = XLSX.read(buf, { type: "array" });
+                        const ws = wb.Sheets[wb.SheetNames[0]];
+                        const data = XLSX.utils.sheet_to_json(ws, {
+                            defval: "",
+                            raw: false,
+                        });
+                        currentData = data;
+                        // Get fields from header row to preserve order even if some cells are empty
+                        const headerRows = XLSX.utils.sheet_to_json(ws, {
+                            header: 1,
+                            defval: "",
+                        });
+                        currentFields = headerRows.length
+                            ? headerRows[0]
+                                  .map((h) => String(h))
+                                  .filter(Boolean)
+                            : [];
+                        currentFormat = "xlsx";
+                    } else {
+                        throw new Error(
+                            "Formato non supportato. Usa CSV, XLSX o XLS.",
+                        );
+                    }
+                    if (!currentData.length || !currentFields.length) {
+                        throw new Error("Il file sembra vuoto o senza header.");
+                    }
+                    renderResults();
+                } catch (err) {
+                    resultsEl.innerHTML = `
+      <div class="card error-card">
+        <h2>Errore</h2>
+        <p style="margin:0">${escapeHtml(err.message)}</p>
+      </div>`;
+                }
+            }
+
+            function renderResults() {
+                const provinceCol = findProvinceColumn(currentFields);
+
+                if (!provinceCol) {
+                    resultsEl.innerHTML = `
+      <div class="card">
+        <h2>Colonna provincia non rilevata</h2>
+        <p style="margin:0 0 1rem 0; color: var(--muted); font-size: 0.92rem">
+          Non sono riuscito a identificare automaticamente la colonna. Selezionala manualmente:
+        </p>
+        <div class="select-row">
+          <select id="manualCol">
+            <option value="">— scegli colonna —</option>
+            ${currentFields.map((f) => `<option value="${escapeHtml(f)}">${escapeHtml(f)}</option>`).join("")}
+          </select>
+        </div>
+      </div>`;
+                    document
+                        .getElementById("manualCol")
+                        .addEventListener("change", (e) => {
+                            if (e.target.value)
+                                renderWithColumn(e.target.value);
+                        });
+                    return;
+                }
+
+                renderWithColumn(provinceCol);
+            }
+
+            function renderWithColumn(provinceCol) {
+                const values = currentData.map((r) => r[provinceCol]);
+                const format = detectFormat(values);
+
+                const preview = currentData.slice(0, 6).map((r) => {
+                    const orig = r[provinceCol];
+                    const { ok, ext } = toExternalId(orig);
+                    return {
+                        orig: orig == null ? "" : String(orig),
+                        ext: ok ? ext : "— non riconosciuto —",
+                        ok,
+                    };
+                });
+
+                let matched = 0;
+                const unmatched = [];
+                for (let i = 0; i < currentData.length; i++) {
+                    const orig = currentData[i][provinceCol];
+                    if (orig == null || !String(orig).trim()) continue;
+                    const { ok } = toExternalId(orig);
+                    if (ok) matched++;
+                    else unmatched.push({ row: i + 2, value: String(orig) });
+                }
+
+                const total = currentData.filter(
+                    (r) =>
+                        r[provinceCol] != null && String(r[provinceCol]).trim(),
+                ).length;
+
+                const formatLabel = {
+                    code: "Sigla (es. MI)",
+                    name: "Nome esteso (es. Milano)",
+                    mixed: "Misto",
+                    empty: "Vuoto",
+                }[format];
+
+                // Build column selector to allow override
+                const colOptions = currentFields
+                    .map(
+                        (f) =>
+                            `<option value="${escapeHtml(f)}"${f === provinceCol ? " selected" : ""}>${escapeHtml(f)}</option>`,
+                    )
+                    .join("");
+
+                resultsEl.innerHTML = `
+    <div class="card">
+      <h2>Rilevamento</h2>
+      <div class="fields">
+        <div class="field">
+          <label>Colonna provincia</label>
+          <div class="select-row">
+            <select id="colSelect" style="max-width:100%">${colOptions}</select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Formato rilevato</label>
+          <div class="value"><span class="badge ${format}">${formatLabel}</span></div>
+        </div>
+        <div class="field">
+          <label>Header di output</label>
+          <div class="value">state_id/id</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Anteprima — prime ${preview.length} righe</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Originale</th>
+            <th></th>
+            <th>state_id/id</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${preview
+              .map(
+                  (p) => `
+            <tr>
+              <td>${escapeHtml(p.orig || "∅")}</td>
+              <td class="arrow">→</td>
+              <td class="${p.ok ? "ok" : "fail"}">${escapeHtml(p.ext)}</td>
+            </tr>
+          `,
+              )
+              .join("")}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Riepilogo</h2>
+      <div class="summary">
+        <div class="stat ok">
+          <div class="num">${matched}</div>
+          <div class="label">Convertite</div>
+        </div>
+        <div class="stat warn">
+          <div class="num">${unmatched.length}</div>
+          <div class="label">Non riconosciute</div>
+        </div>
+        <div class="stat">
+          <div class="num">${total}</div>
+          <div class="label">Righe totali</div>
+        </div>
+      </div>
+
+      ${
+          unmatched.length
+              ? `
+        <div class="warnings">
+          <strong>${unmatched.length} valori non riconosciuti — verranno lasciati vuoti</strong>
+          <ul>
+            ${unmatched
+                .slice(0, 30)
+                .map(
+                    (u) =>
+                        `<li>riga ${u.row}: <code>${escapeHtml(u.value)}</code></li>`,
+                )
+                .join("")}
+            ${unmatched.length > 30 ? `<li>… e altri ${unmatched.length - 30}</li>` : ""}
+          </ul>
+        </div>`
+              : ""
+      }
+
+      <div class="actions">
+        <button id="downloadBtn">Scarica file convertito</button>
+        <button class="secondary" id="resetBtn">Carica un altro file</button>
+      </div>
+    </div>
+  `;
+
+                document
+                    .getElementById("colSelect")
+                    .addEventListener("change", (e) => {
+                        if (e.target.value) renderWithColumn(e.target.value);
+                    });
+                document
+                    .getElementById("downloadBtn")
+                    .addEventListener("click", () => doDownload(provinceCol));
+                document
+                    .getElementById("resetBtn")
+                    .addEventListener("click", () => {
+                        resultsEl.innerHTML = "";
+                        fileInput.value = "";
+                        currentFile = null;
+                        currentData = null;
+                        currentFields = null;
+                    });
+            }
+
+            function doDownload(provinceCol) {
+                const newFields = currentFields.map((f) =>
+                    f === provinceCol ? "state_id/id" : f,
+                );
+                const newData = currentData.map((row) => {
+                    const out = {};
+                    for (const f of currentFields) {
+                        if (f === provinceCol) {
+                            const { ext } = toExternalId(row[f]);
+                            out["state_id/id"] = ext;
+                        } else {
+                            out[f] = row[f];
+                        }
+                    }
+                    return out;
+                });
+
+                const baseName = currentFile.name.replace(
+                    /\.(csv|xlsx|xls)$/i,
+                    "",
+                );
+
+                if (currentFormat === "csv") {
+                    const csv = Papa.unparse({
+                        fields: newFields,
+                        data: newData,
+                    });
+                    // BOM so Excel reads UTF-8 correctly
+                    const blob = new Blob(["\uFEFF" + csv], {
+                        type: "text/csv;charset=utf-8",
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `${baseName}_odoo.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                } else {
+                    const ws = XLSX.utils.json_to_sheet(newData, {
+                        header: newFields,
+                    });
+                    const wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+                    XLSX.writeFile(wb, `${baseName}_odoo.xlsx`);
+                }
+            }
+        </script>
+    </body>
+</html>
