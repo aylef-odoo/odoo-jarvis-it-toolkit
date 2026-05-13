@@ -7,122 +7,202 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@1,500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
             rel="stylesheet"
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <style>
             :root {
-                --bg: #f5f2ea;
-                --bg-elev: #faf8f3;
-                --fg: #1a1a1a;
-                --muted: #6b6760;
-                --border: #d8d2c4;
-                --border-strong: #b8b0a0;
-                --accent: #2d5d3e;
-                --accent-hover: #224a31;
-                --accent-soft: #e8efe9;
-                --success: #2d5d3e;
-                --warning: #8a5a00;
-                --warning-bg: #fbf3df;
-                --warning-border: #e8d49a;
-                --error: #8b2c1f;
-                --error-bg: #f8e8e4;
+                /* Odoo brand */
+                --brand: #714b67;
+                --brand-700: #5e3f57;
+                --brand-50: #f4eef2;
+                --accent: #017e84;
+                --accent-50: #e6f3f4;
+
+                /* Neutrals */
+                --bg: #f6f7f9;
+                --surface: #ffffff;
+                --text: #111827;
+                --text-muted: #6b7280;
+                --text-subtle: #9ca3af;
+                --border: #e5e7eb;
+                --border-strong: #d1d5db;
+
+                /* Semantic */
+                --success: #15803d;
+                --success-50: #f0fdf4;
+                --warning: #b45309;
+                --warning-50: #fffbeb;
+                --warning-border: #fde68a;
+                --danger: #b91c1c;
+                --danger-50: #fef2f2;
+
+                /* Shape */
+                --radius-sm: 4px;
+                --radius: 8px;
+                --radius-lg: 12px;
+                --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+                --shadow: 0 1px 3px rgba(15, 23, 42, 0.06),
+                    0 4px 12px rgba(15, 23, 42, 0.04);
+
+                /* Type */
+                --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+                    sans-serif;
+                --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo,
+                    monospace;
             }
             * {
                 box-sizing: border-box;
+                margin: 0;
+                padding: 0;
             }
             html,
             body {
-                margin: 0;
-                padding: 0;
+                font-family: var(--sans);
                 background: var(--bg);
-                color: var(--fg);
-                font-family: "IBM Plex Sans", system-ui, sans-serif;
-                font-size: 15px;
+                color: var(--text);
+                font-size: 14px;
                 line-height: 1.55;
                 -webkit-font-smoothing: antialiased;
-            }
-            body {
                 min-height: 100vh;
-                padding: 3rem 1.25rem 5rem;
-                background-image: radial-gradient(
-                    circle at 1px 1px,
-                    rgba(0, 0, 0, 0.04) 1px,
-                    transparent 0
-                );
-                background-size: 24px 24px;
             }
-            main {
-                max-width: 760px;
+
+            /* ---- App header (shared) -------------------------------------- */
+            .app-header {
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 0.85rem 1.5rem;
+            }
+            .app-header .wrap {
+                max-width: 1100px;
                 margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
             }
-            header {
-                margin-bottom: 2.5rem;
+            .app-header .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
             }
-            .eyebrow {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.72rem;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: var(--muted);
-                margin: 0 0 0.6rem 0;
+            .app-header .brand-mark {
+                width: 34px;
+                height: 34px;
+                background: var(--brand);
+                border-radius: var(--radius-sm);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-family: var(--mono);
+                font-weight: 600;
+                font-size: 12px;
+                letter-spacing: 0.04em;
             }
-            h1 {
-                font-family: "IBM Plex Serif", serif;
-                font-style: italic;
-                font-weight: 500;
-                font-size: 2rem;
-                margin: 0 0 0.4rem 0;
-                line-height: 1.15;
+            .app-header .brand-title {
+                font-size: 0.95rem;
+                font-weight: 600;
                 letter-spacing: -0.01em;
+                line-height: 1.2;
             }
-            h1 .mono {
-                font-family: "IBM Plex Mono", monospace;
-                font-style: normal;
+            .app-header .brand-sub {
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+            .app-header .meta {
+                text-align: right;
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                color: var(--text-subtle);
+                line-height: 1.4;
+            }
+            .app-header .meta strong {
+                display: block;
+                color: var(--text-muted);
                 font-weight: 500;
-                font-size: 0.85em;
-                background: var(--fg);
-                color: var(--bg);
-                padding: 1px 8px;
-                border-radius: 3px;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-bottom: 2px;
+            }
+
+            /* ---- Main ----------------------------------------------------- */
+            main {
+                max-width: 880px;
+                margin: 0 auto;
+                padding: 2rem 1.5rem 4rem;
+            }
+
+            /* ---- Hero ----------------------------------------------------- */
+            .hero {
+                margin-bottom: 1.75rem;
+            }
+            .hero h1 {
+                font-size: 1.55rem;
+                font-weight: 600;
+                letter-spacing: -0.02em;
+                line-height: 1.2;
+                margin-bottom: 0.5rem;
+            }
+            .hero h1 .mono {
+                font-family: var(--mono);
+                font-size: 0.72em;
+                font-weight: 500;
+                background: var(--brand-50);
+                color: var(--brand);
+                padding: 2px 8px;
+                border-radius: var(--radius-sm);
                 letter-spacing: 0;
             }
-            .subtitle {
-                color: var(--muted);
-                margin: 0;
+            .hero p {
+                color: var(--text-muted);
                 font-size: 0.95rem;
-                max-width: 56ch;
+                max-width: 62ch;
             }
+            .hero p code {
+                font-family: var(--mono);
+                font-size: 0.85em;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                padding: 1px 6px;
+                border-radius: 3px;
+                color: var(--text);
+            }
+
+            /* ---- Dropzone ------------------------------------------------- */
             .dropzone {
                 display: block;
+                background: var(--surface);
                 border: 1.5px dashed var(--border-strong);
-                border-radius: 4px;
-                padding: 3.5rem 1.5rem;
+                border-radius: var(--radius);
+                padding: 3.25rem 1.5rem;
                 text-align: center;
                 cursor: pointer;
-                background: var(--bg-elev);
-                transition: all 0.18s ease;
-                position: relative;
+                transition:
+                    background 0.18s ease,
+                    border-color 0.18s ease;
+                margin-bottom: 1.5rem;
             }
             .dropzone:hover {
-                border-color: var(--accent);
-                background: var(--accent-soft);
+                border-color: var(--brand);
+                background: var(--brand-50);
             }
             .dropzone.over {
-                border-color: var(--accent);
+                border-color: var(--brand);
                 border-style: solid;
-                background: var(--accent-soft);
-                transform: translateY(-1px);
+                background: var(--brand-50);
             }
             .dropzone input {
                 display: none;
             }
             .dropzone .glyph {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 1.4rem;
-                color: var(--muted);
+                font-family: var(--mono);
+                font-size: 1.5rem;
+                color: var(--text-muted);
                 margin-bottom: 0.5rem;
             }
             .dropzone p {
@@ -132,96 +212,116 @@
                 font-weight: 600;
             }
             .dropzone .hint {
-                color: var(--muted);
-                font-family: "IBM Plex Mono", monospace;
+                color: var(--text-muted);
+                font-family: var(--mono);
                 font-size: 0.78rem;
                 margin-top: 0.6rem;
             }
+
+            /* ---- Card (shared) ------------------------------------------- */
             .card {
-                background: var(--bg-elev);
+                background: var(--surface);
                 border: 1px solid var(--border);
-                border-radius: 4px;
-                padding: 1.4rem 1.5rem;
-                margin-top: 1.25rem;
+                border-radius: var(--radius);
+                padding: 1.25rem 1.4rem;
+                margin-top: 1rem;
+                box-shadow: var(--shadow-sm);
             }
             .card h2 {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.72rem;
-                font-weight: 500;
+                font-family: var(--sans);
+                font-size: 0.7rem;
+                font-weight: 600;
                 text-transform: uppercase;
-                letter-spacing: 0.12em;
-                color: var(--muted);
-                margin: 0 0 1.1rem 0;
+                letter-spacing: 0.1em;
+                color: var(--text-muted);
+                margin-bottom: 1.1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
             }
+            .card h2::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--brand);
+                flex-shrink: 0;
+            }
+
+            /* ---- Fields grid --------------------------------------------- */
             .fields {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 1.2rem;
             }
             .field label {
                 display: block;
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.7rem;
+                font-size: 0.66rem;
+                font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
-                color: var(--muted);
-                margin-bottom: 0.3rem;
+                color: var(--text-muted);
+                margin-bottom: 0.35rem;
             }
             .field .value {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.95rem;
+                font-family: var(--mono);
+                font-size: 0.9rem;
                 font-weight: 500;
                 word-break: break-all;
             }
+
+            /* ---- Badges --------------------------------------------------- */
             .badge {
                 display: inline-block;
-                padding: 3px 9px;
-                border-radius: 3px;
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.78rem;
+                padding: 2px 9px;
+                border-radius: 999px;
+                font-family: var(--mono);
+                font-size: 0.72rem;
                 font-weight: 500;
                 letter-spacing: 0.02em;
-                border: 1px solid currentColor;
+                border: 1px solid;
             }
             .badge.code {
-                color: #1d4ed8;
-                background: #e0e9ff;
-                border-color: #b9c9ff;
+                color: var(--accent);
+                background: var(--accent-50);
+                border-color: rgba(1, 126, 132, 0.25);
             }
             .badge.name {
-                color: #92400e;
-                background: #fbf0d4;
-                border-color: #e8cf94;
+                color: var(--warning);
+                background: var(--warning-50);
+                border-color: var(--warning-border);
             }
             .badge.mixed {
-                color: #831843;
-                background: #fbe1ee;
-                border-color: #f0bcd5;
+                color: var(--brand);
+                background: var(--brand-50);
+                border-color: rgba(113, 75, 103, 0.25);
             }
             .badge.empty {
-                color: var(--muted);
+                color: var(--text-subtle);
                 background: transparent;
+                border-color: var(--border);
             }
+
+            /* ---- Table ---------------------------------------------------- */
             table {
                 width: 100%;
                 border-collapse: collapse;
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.85rem;
+                font-family: var(--mono);
+                font-size: 0.82rem;
             }
             table th,
             table td {
-                padding: 8px 12px;
+                padding: 9px 12px;
                 text-align: left;
             }
             table th {
-                font-family: "IBM Plex Sans", sans-serif;
+                font-family: var(--sans);
                 font-weight: 500;
-                font-size: 0.7rem;
+                font-size: 0.66rem;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
-                color: var(--muted);
+                color: var(--text-muted);
                 border-bottom: 1px solid var(--border-strong);
-                padding-bottom: 6px;
             }
             table td {
                 border-bottom: 1px solid var(--border);
@@ -230,36 +330,38 @@
                 border-bottom: none;
             }
             .arrow {
-                color: var(--muted);
+                color: var(--text-subtle);
                 padding: 0 0.4rem;
-                font-family: "IBM Plex Mono", monospace;
+                font-family: var(--mono);
             }
             .ok {
                 color: var(--success);
             }
             .fail {
-                color: var(--error);
+                color: var(--danger);
             }
+
+            /* ---- Stats summary ------------------------------------------- */
             .summary {
                 display: flex;
-                gap: 2rem;
+                gap: 2.5rem;
                 margin-bottom: 1.2rem;
                 flex-wrap: wrap;
             }
             .stat .num {
-                font-family: "IBM Plex Serif", serif;
-                font-style: italic;
-                font-weight: 500;
-                font-size: 2.2rem;
+                font-size: 1.85rem;
+                font-weight: 600;
                 line-height: 1;
+                letter-spacing: -0.02em;
+                color: var(--text);
             }
             .stat .label {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.7rem;
+                font-size: 0.66rem;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
-                color: var(--muted);
-                margin-top: 0.35rem;
+                color: var(--text-muted);
+                margin-top: 0.45rem;
+                font-weight: 500;
             }
             .stat.ok .num {
                 color: var(--success);
@@ -267,35 +369,38 @@
             .stat.warn .num {
                 color: var(--warning);
             }
+
+            /* ---- Buttons ------------------------------------------------- */
             button {
-                font-family: "IBM Plex Sans", sans-serif;
-                background: var(--accent);
-                color: white;
-                border: none;
-                padding: 11px 22px;
-                border-radius: 3px;
-                font-size: 0.92rem;
+                font-family: inherit;
+                font-size: 0.85rem;
                 font-weight: 500;
                 cursor: pointer;
+                border: 1px solid transparent;
+                border-radius: var(--radius-sm);
+                padding: 0.55rem 1rem;
+                background: var(--brand);
+                color: #fff;
                 transition:
                     background 0.15s,
-                    transform 0.05s;
+                    border-color 0.15s,
+                    color 0.15s;
                 letter-spacing: 0.01em;
             }
             button:hover {
-                background: var(--accent-hover);
+                background: var(--brand-700);
             }
             button:active {
                 transform: translateY(1px);
             }
             button.secondary {
                 background: transparent;
-                color: var(--fg);
-                border: 1px solid var(--border-strong);
+                color: var(--text);
+                border-color: var(--border-strong);
             }
             button.secondary:hover {
-                background: var(--bg);
-                border-color: var(--fg);
+                background: var(--surface);
+                border-color: var(--text-muted);
             }
             .actions {
                 display: flex;
@@ -303,47 +408,55 @@
                 margin-top: 1.2rem;
                 flex-wrap: wrap;
             }
+
+            /* ---- Warnings & errors --------------------------------------- */
             .warnings {
-                background: var(--warning-bg);
+                background: var(--warning-50);
                 border: 1px solid var(--warning-border);
-                border-radius: 3px;
-                padding: 0.85rem 1rem;
+                border-radius: var(--radius-sm);
+                padding: 0.9rem 1rem;
                 color: var(--warning);
-                font-size: 0.88rem;
+                font-size: 0.85rem;
                 margin-top: 1rem;
             }
             .warnings strong {
                 display: block;
                 margin-bottom: 0.45rem;
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.78rem;
+                font-family: var(--sans);
+                font-size: 0.72rem;
+                font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
             }
             .warnings ul {
                 margin: 0;
-                padding-left: 1.1rem;
+                padding-left: 1.2rem;
                 max-height: 180px;
                 overflow-y: auto;
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.82rem;
+                font-family: var(--mono);
+                font-size: 0.8rem;
             }
             .warnings li {
                 margin: 2px 0;
             }
             .warnings code {
-                background: rgba(0, 0, 0, 0.06);
+                background: rgba(180, 83, 9, 0.1);
                 padding: 1px 5px;
                 border-radius: 2px;
             }
             .error-card {
-                background: var(--error-bg);
-                border: 1px solid #d9b3aa;
-                color: var(--error);
+                background: var(--danger-50);
+                border-color: rgba(185, 28, 28, 0.25);
+                color: var(--danger);
             }
             .error-card h2 {
-                color: var(--error);
+                color: var(--danger);
             }
+            .error-card h2::before {
+                background: var(--danger);
+            }
+
+            /* ---- Select row & native select ------------------------------ */
             .select-row {
                 display: flex;
                 align-items: center;
@@ -351,32 +464,44 @@
                 flex-wrap: wrap;
             }
             select {
-                font-family: "IBM Plex Mono", monospace;
-                padding: 8px 12px;
+                font-family: inherit;
+                padding: 0.5rem 0.65rem;
                 border: 1px solid var(--border-strong);
-                border-radius: 3px;
-                background: white;
-                font-size: 0.88rem;
-                color: var(--fg);
+                border-radius: var(--radius-sm);
+                background: var(--surface);
+                font-size: 0.85rem;
+                color: var(--text);
                 cursor: pointer;
+                transition:
+                    border-color 0.15s,
+                    box-shadow 0.15s;
             }
             select:focus {
-                outline: 2px solid var(--accent);
-                outline-offset: 1px;
+                outline: none;
+                border-color: var(--brand);
+                box-shadow: 0 0 0 3px var(--brand-50);
             }
+
+            /* ---- Footer --------------------------------------------------- */
             footer {
-                margin: 4rem auto 0;
-                max-width: 760px;
+                max-width: 1100px;
+                margin: 3rem auto 0;
+                padding: 0 1.5rem;
                 text-align: center;
-                color: var(--muted);
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.75rem;
+                color: var(--text-muted);
+                font-size: 0.78rem;
             }
             footer code {
-                background: rgba(0, 0, 0, 0.05);
-                padding: 2px 6px;
-                border-radius: 2px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                padding: 1px 6px;
+                border-radius: 3px;
+                font-family: var(--mono);
+                font-size: 0.78em;
+                color: var(--text);
             }
+
+            /* ---- Misc ---------------------------------------------------- */
             .divider {
                 border: none;
                 border-top: 1px solid var(--border);
@@ -385,21 +510,36 @@
         </style>
     </head>
     <body>
+        <header class="app-header">
+            <div class="wrap">
+                <div class="brand">
+                    <div class="brand-mark">OLK</div>
+                    <div>
+                        <div class="brand-title">State ID Converter</div>
+                        <div class="brand-sub">
+                            Province → Odoo external ID
+                        </div>
+                    </div>
+                </div>
+                <div class="meta">
+                    <strong>Odoo Localization Kit</strong>
+                    <span>IT · base.state_it_*</span>
+                </div>
+            </div>
+        </header>
+
         <main>
-            <header>
-                <p class="eyebrow">Tool — Odoo Import Helper</p>
-                <h1>Province → <span class="mono">state_id/id</span></h1>
-                <p class="subtitle">
+            <section class="hero">
+                <h1>
+                    Province →
+                    <span class="mono">state_id/id</span>
+                </h1>
+                <p>
                     Carica un CSV o Excel: rilevo la colonna provincia, capisco
-                    se è in sigla o nome esteso, e la converto negli external ID
-                    Odoo (<code
-                        style="
-                            font-family: &quot;IBM Plex Mono&quot;, monospace;
-                        "
-                        >base.state_it_xx</code
-                    >).
+                    se è in sigla o nome esteso, e la converto negli external
+                    ID nativi di Odoo (<code>base.state_it_xx</code>).
                 </p>
-            </header>
+            </section>
 
             <label class="dropzone" id="dropzone" for="fileInput">
                 <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" />
@@ -850,7 +990,7 @@
                     resultsEl.innerHTML = `
       <div class="card">
         <h2>Colonna provincia non rilevata</h2>
-        <p style="margin:0 0 1rem 0; color: var(--muted); font-size: 0.92rem">
+        <p style="margin:0 0 1rem 0; color: var(--text-muted); font-size: 0.9rem">
           Non sono riuscito a identificare automaticamente la colonna. Selezionala manualmente:
         </p>
         <div class="select-row">
