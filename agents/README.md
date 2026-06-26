@@ -14,15 +14,15 @@ report complete with practical examples, diagrams, and developer-ready reference
 
 There is **one skill**, used in two ways:
 
-| Way | Where it runs | Install needed | Best for |
-|-----|---------------|----------------|----------|
-| **Gemini CLI** (primary) | Your terminal | Node.js + a CLI | The full skill: reads Odoo on GitHub and **saves reports to files**. |
-| **Gemini Gem** (fallback) | gemini.google.com (browser) | **None** | People without the CLI — same logic, answers come back in the chat. |
+| Method | Where it runs | Install needed | Best for |
+|--------|---------------|----------------|----------|
+| **1 — Gemini Gem** | gemini.google.com (browser) | **None** | Anyone. The easiest way to start — answers come back in the chat. |
+| **2 — Gemini CLI** | Your terminal | Node.js + a CLI | People who want the full skill that **saves reports to files**. |
 
 > A **skill** is a small set of instructions that teaches the AI assistant how to behave
 > for a specific job. You set it up once, then it works automatically whenever your
-> request matches what it is for. The **Gem** is the same skill pasted into the browser
-> for people who can't (or don't want to) install the CLI.
+> request matches what it is for. The **Gem** is the same skill pasted into the browser,
+> so you don't need to install anything.
 
 ---
 
@@ -30,85 +30,17 @@ There is **one skill**, used in two ways:
 
 | Path | What it is |
 |------|------------|
-| [`skills/odoo-how-it-works-functional/SKILL.md`](./skills/odoo-how-it-works-functional/SKILL.md) | The **skill** in Agent Skills format — what the Gemini CLI loads. |
-| [`skills/odoo-how-it-works-functional/GEM.md`](./skills/odoo-how-it-works-functional/GEM.md) | The same instructions, **paste-ready** for a browser Gem (the fallback). |
+| [`skills/odoo-how-it-works-functional/GEM.md`](./skills/odoo-how-it-works-functional/GEM.md) | The **paste-ready instructions** for a browser Gem (Method 1). |
+| [`skills/odoo-how-it-works-functional/SKILL.md`](./skills/odoo-how-it-works-functional/SKILL.md) | The same instructions in Agent Skills format — what the Gemini CLI loads (Method 2). |
 
-Everything lives under the one skill folder, so the CLI and the Gem stay in sync.
-
----
-
-# Primary — Gemini CLI 💻
-
-The **Gemini CLI** is a free, open-source command-line assistant from Google. It loads the
-skill directly and, because it runs on your computer, it can **save each report as a
-markdown file** in a `doc/` folder.
-
-### 1. Install the Gemini CLI and the skill
-
-Install the CLI (needs **Node.js / npm**):
-
-```bash
-npm install -g @google/gemini-cli
-```
-
-Then add the skill straight from this repository — the CLI installs it for you:
-
-```bash
-gemini skills install https://github.com/aylef-odoo/odoo-jarvis-it-toolkit
-```
-
-> Replace the URL with this repository's address. The CLI also discovers any skill placed
-> in `~/.gemini/skills/`, so you can instead copy the
-> [`skills/odoo-how-it-works-functional/`](./skills/odoo-how-it-works-functional/) folder
-> there by hand.
-
-### 2. Set up your workspace (no need to clone Odoo!)
-
-> [!IMPORTANT]
-> **You do not need to clone the 10 GB of Odoo source code.**
-> The skill reads the code directly from GitHub in real time, for any Odoo version.
-
-1. Create an empty folder for your reports (e.g. `odoo-explainer` in your Home).
-2. Open a terminal **in that folder** and run `gemini`.
-3. Sign in with your Google account when prompted.
-
-### 3. Ask your question
-
-Describe what you want to understand, always specifying:
-
-1. **The Odoo feature or field** you want to understand.
-2. **The Odoo version** (e.g. 16.0, 17.0, 18.0, or master). If you forget, it will ask.
-
-The skill activates automatically when your question matches an Odoo functional explanation.
-
-> [!TIP]
-> **Case 1: Deferred (TD24) vs immediate (TD01) invoices**
-> *"Can you explain how Odoo 17.0 decides whether an invoice should be sent to SDI with
-> code TD24 (deferred invoice) or TD01 (immediate invoice)?"*
-
-> [!TIP]
-> **Case 2: Reverse charge and self-billing**
-> *"How does the automatic generation of reverse-charge self-invoices (e.g. TD17 or TD18)
-> work in Odoo 18.0? Which tax configurations are needed?"*
-
-> [!TIP]
-> **Case 3: Stamp duty calculation**
-> *"In Odoo 16.0, when is the DatiBollo block added to the electronic invoice XML and how
-> is the 2€ amount calculated?"*
-
-### 4. Read and use the report
-
-The CLI saves a markdown report into the `doc/` folder of your workspace (e.g.
-`doc/how_it_works_reverse_charge_v17.md`) and tells you the path. See
-[What the report contains](#-what-the-report-contains) below.
+Everything lives under the one skill folder, so the Gem and the CLI stay in sync.
 
 ---
 
-# Fallback — Gemini Gem (no install) 🌐
+# Method 1 — Gemini Gem (easiest, no install) 🌐
 
-For people **without the Gemini CLI**, the same skill runs as a **Gem** — a custom version
-of Gemini you build in your browser. Nothing to install, just a Google account. The only
-difference: a Gem can't save files, so it writes the report **directly in the chat**.
+A **Gem** is a custom version of Gemini you build in your browser. Nothing to install,
+just a Google account. The report comes back **directly in the chat**.
 
 ### 1. Create the Gem
 
@@ -125,9 +57,79 @@ Google Workspace.
 
 ### 2. Ask your question
 
-Open a chat with your Gem and ask as you would in the CLI (same example prompts above),
-remembering to state the **Odoo version**. The Gem reads the real Odoo source on GitHub and
-writes the report straight into the chat.
+Open a chat with your Gem and describe what you want to understand, always specifying:
+
+1. **The Odoo feature or field** you want to understand.
+2. **The Odoo version** (e.g. 16.0, 17.0, 18.0, or master). If you forget, the Gem will
+   ask you.
+
+> [!TIP]
+> **Case 1: Deferred (TD24) vs immediate (TD01) invoices**
+> *"Can you explain how Odoo 17.0 decides whether an invoice should be sent to SDI with
+> code TD24 (deferred invoice) or TD01 (immediate invoice)?"*
+
+> [!TIP]
+> **Case 2: Reverse charge and self-billing**
+> *"How does the automatic generation of reverse-charge self-invoices (e.g. TD17 or TD18)
+> work in Odoo 18.0? Which tax configurations are needed?"*
+
+> [!TIP]
+> **Case 3: Stamp duty calculation**
+> *"In Odoo 16.0, when is the DatiBollo block added to the electronic invoice XML and how
+> is the 2€ amount calculated?"*
+
+### 3. Read the report
+
+The Gem reads the real Odoo source on GitHub for the version you asked about, then writes
+the report **directly in the chat** (a Gem can't save files — that's what Method 2 is for).
+See [What the report contains](#-what-the-report-contains) below.
+
+---
+
+# Method 2 — Gemini CLI (saves reports to files) 💻
+
+The **Gemini CLI** is a free, open-source command-line assistant from Google. It loads the
+**same skill** as the Gem, but because it runs on your computer it can **save each report
+as a markdown file** in a `doc/` folder. Use this if you want to keep and share the reports.
+
+### 1. Install the Gemini CLI and the skill
+
+Install the CLI (needs **Node.js / npm**):
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+Then add the skill straight from this repository — the CLI installs it for you:
+
+```bash
+gemini skills install https://github.com/aylef-odoo/odoo-jarvis-it-toolkit
+```
+
+> The CLI also discovers any skill placed in `~/.gemini/skills/`, so you can instead copy
+> the [`skills/odoo-how-it-works-functional/`](./skills/odoo-how-it-works-functional/)
+> folder there by hand.
+
+### 2. Set up your workspace (no need to clone Odoo!)
+
+> [!IMPORTANT]
+> **You do not need to clone the 10 GB of Odoo source code.**
+> The skill reads the code directly from GitHub in real time, for any Odoo version.
+
+1. Create an empty folder for your reports (e.g. `odoo-explainer` in your Home).
+2. Open a terminal **in that folder** and run `gemini`.
+3. Sign in with your Google account when prompted.
+
+### 3. Ask your question
+
+Type your request in the chat, specifying the feature **and** the Odoo version (same example
+prompts as in [Method 1](#2-ask-your-question)). The skill activates automatically when your
+question matches an Odoo functional explanation.
+
+### 4. Read and use the report
+
+The CLI saves a markdown report into the `doc/` folder of your workspace (e.g.
+`doc/how_it_works_reverse_charge_v17.md`) and tells you the path.
 
 ---
 
@@ -145,7 +147,7 @@ writes the report straight into the chat.
 
 ## ❓ Which one should I use?
 
-- **Have a terminal and want reports saved as files?** → **Gemini CLI** (primary).
-- **No CLI, just want answers in the browser?** → **Gemini Gem** (fallback).
+- **Just want answers with zero setup?** → **Method 1 (Gem)**. Open a browser and go.
+- **Want the reports saved as files to keep and share?** → **Method 2 (Gemini CLI)**.
 
 Both use the exact same logic — only where it runs and how the report is delivered differ.

@@ -9,9 +9,9 @@ The repository is organized **by country**. Each country folder contains its own
 | Path | What it is |
 |------|------------|
 | [`IT/`](./IT/) | 🇮🇹 Italy — accounting demo data, SDI samples + XML generator, CBI payment examples, province → `state_id` converter |
-| [`agents/`](./agents/) | 🤖 AI skill for [Google Gemini](https://gemini.google.com) — ask the assistant how any Odoo feature works and get a functional report. Runs in the **Gemini CLI**, with a no-install **Gem** fallback in the browser |
+| [`agents/`](./agents/) | 🤖 AI skill for [Google Gemini](https://gemini.google.com) — ask the assistant how any Odoo feature works and get a functional report. Runs as a no-install **Gem** in the browser, or via the **Gemini CLI** to save reports to files |
 
-Each country folder has its own `README.md` with an overview and links to each section. The `agents/` folder has its own `README.md` explaining the one skill and its two ways to run: the **Gemini CLI** (primary — installs the skill with `gemini skills install` and saves reports to files), or a no-install **Gemini Gem** in the browser (fallback for people without the CLI).
+Each country folder has its own `README.md` with an overview and links to each section. The `agents/` folder has its own `README.md` explaining the one skill and its two ways to run: a no-install **Gemini Gem** in the browser (the easiest start), or the **Gemini CLI** (installs the skill with `gemini skills install` and saves reports to files).
 
 ## 🚀 Quick start
 
@@ -21,7 +21,7 @@ Each country folder has its own `README.md` with an overview and links to each s
 3. Follow the per-section guides for import steps, warnings, and usage tips.
 
 **Want the AI assistant that explains how Odoo works (no coding needed)?**
-Head to [`agents/`](./agents/) — its README walks you through both options. The primary route is the **Gemini CLI**, which loads the skill (`gemini skills install`) and saves reports to files. No terminal? Use the **Gemini Gem** fallback: paste the ready-made instructions into a browser Gem (zero install).
+Head to [`agents/`](./agents/) — its README walks you through both options. The easiest start is a **Gemini Gem**: paste the ready-made instructions into a browser Gem (zero install). Prefer reports saved to files? Use the **Gemini CLI**, which loads the skill with `gemini skills install`.
 
 ## 🧰 What's inside, in two categories
 
