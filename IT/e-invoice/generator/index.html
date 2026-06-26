@@ -125,6 +125,39 @@
                 margin-bottom: 2px;
             }
 
+            /* ---- Top nav (shared) -------------------------------------- */
+            .app-nav {
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 0 1.5rem;
+            }
+            .app-nav .wrap {
+                max-width: 1100px;
+                margin: 0 auto;
+                display: flex;
+                gap: 0.25rem;
+                flex-wrap: wrap;
+            }
+            .app-nav a {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding: 0.65rem 0.9rem;
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: var(--text-muted);
+                text-decoration: none;
+                border-bottom: 2px solid transparent;
+                transition: color 0.12s ease, border-color 0.12s ease;
+            }
+            .app-nav a:hover {
+                color: var(--text);
+            }
+            .app-nav a.active {
+                color: var(--brand);
+                border-bottom-color: var(--brand);
+            }
+
             /* ---- Main layout ------------------------------------------- */
             main {
                 max-width: 1100px;
@@ -590,7 +623,7 @@
         <header class="app-header">
             <div class="wrap">
                 <div class="brand">
-                    <div class="brand-mark">OLK</div>
+                    <div class="brand-mark">OJT</div>
                     <div>
                         <div class="brand-title">SDI e-invoice Generator</div>
                         <div class="brand-sub">
@@ -604,6 +637,14 @@
                 </div>
             </div>
         </header>
+
+        <nav class="app-nav">
+            <div class="wrap">
+                <a href="../../../">← Home</a>
+                <a href="./" class="active">SDI e-invoice XML</a>
+                <a href="../../state-id-converter/">Province → state_id</a>
+            </div>
+        </nav>
 
         <main>
             <div class="left">

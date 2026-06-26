@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Odoo Jarvis IT Toolkit — browser tools</title>
+        <meta
+            name="description"
+            content="Small browser-based tools for the Italian Odoo localization: an SDI e-invoice XML generator and a province → state_id converter."
+        />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+            :root {
+                --brand: #714b67;
+                --brand-700: #5e3f57;
+                --brand-50: #f4eef2;
+                --accent: #017e84;
+                --accent-50: #e6f3f4;
+                --bg: #f6f7f9;
+                --surface: #ffffff;
+                --text: #111827;
+                --text-muted: #6b7280;
+                --text-subtle: #9ca3af;
+                --border: #e5e7eb;
+                --border-strong: #d1d5db;
+                --radius-sm: 4px;
+                --radius: 8px;
+                --radius-lg: 12px;
+                --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+                --shadow: 0 1px 3px rgba(15, 23, 42, 0.06),
+                    0 4px 12px rgba(15, 23, 42, 0.04);
+                --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+                    sans-serif;
+                --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo,
+                    monospace;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                font-family: var(--sans);
+                background: var(--bg);
+                color: var(--text);
+                font-size: 14px;
+                line-height: 1.55;
+                -webkit-font-smoothing: antialiased;
+                min-height: 100vh;
+            }
+
+            /* ---- App header (shared) ----------------------------------- */
+            .app-header {
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 0.85rem 1.5rem;
+            }
+            .app-header .wrap {
+                max-width: 1100px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+            }
+            .app-header .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .app-header .brand-mark {
+                width: 34px;
+                height: 34px;
+                background: var(--brand);
+                border-radius: var(--radius-sm);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-family: var(--mono);
+                font-weight: 600;
+                font-size: 12px;
+                letter-spacing: 0.04em;
+            }
+            .app-header .brand-title {
+                font-size: 0.95rem;
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                line-height: 1.2;
+            }
+            .app-header .brand-sub {
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+            .app-header .meta {
+                text-align: right;
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                color: var(--text-subtle);
+                line-height: 1.4;
+            }
+            .app-header .meta strong {
+                display: block;
+                color: var(--text-muted);
+                font-weight: 500;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-bottom: 2px;
+            }
+            .app-header .meta a {
+                color: var(--accent);
+                text-decoration: none;
+            }
+            .app-header .meta a:hover {
+                text-decoration: underline;
+            }
+
+            /* ---- Top nav (shared) -------------------------------------- */
+            .app-nav {
+                background: var(--surface);
+                border-bottom: 1px solid var(--border);
+                padding: 0 1.5rem;
+            }
+            .app-nav .wrap {
+                max-width: 1100px;
+                margin: 0 auto;
+                display: flex;
+                gap: 0.25rem;
+                flex-wrap: wrap;
+            }
+            .app-nav a {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding: 0.65rem 0.9rem;
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: var(--text-muted);
+                text-decoration: none;
+                border-bottom: 2px solid transparent;
+                transition: color 0.12s ease, border-color 0.12s ease;
+            }
+            .app-nav a:hover {
+                color: var(--text);
+            }
+            .app-nav a.active {
+                color: var(--brand);
+                border-bottom-color: var(--brand);
+            }
+
+            /* ---- Main / hero ------------------------------------------- */
+            main {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 2.75rem 1.5rem 4rem;
+            }
+            .hero {
+                margin-bottom: 2.25rem;
+            }
+            .hero .eyebrow {
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--accent);
+                font-weight: 500;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                margin: 0.5rem 0 0.6rem;
+            }
+            .hero p {
+                color: var(--text-muted);
+                max-width: 640px;
+                font-size: 0.95rem;
+            }
+
+            /* ---- Tool cards -------------------------------------------- */
+            .cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.25rem;
+            }
+            .card {
+                display: flex;
+                flex-direction: column;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+                padding: 1.5rem;
+                text-decoration: none;
+                color: inherit;
+                transition: box-shadow 0.15s ease, border-color 0.15s ease,
+                    transform 0.15s ease;
+            }
+            .card:hover {
+                box-shadow: var(--shadow);
+                border-color: var(--border-strong);
+                transform: translateY(-2px);
+            }
+            .card .icon {
+                width: 42px;
+                height: 42px;
+                border-radius: var(--radius);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+            .card.gen .icon {
+                background: var(--brand-50);
+            }
+            .card.conv .icon {
+                background: var(--accent-50);
+            }
+            .card h2 {
+                font-size: 1.05rem;
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                margin-bottom: 0.35rem;
+            }
+            .card p {
+                color: var(--text-muted);
+                font-size: 0.875rem;
+                flex: 1;
+            }
+            .card .tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+                margin: 0.9rem 0 1.1rem;
+            }
+            .card .tag {
+                font-family: var(--mono);
+                font-size: 0.68rem;
+                padding: 0.18rem 0.45rem;
+                border-radius: var(--radius-sm);
+                background: var(--bg);
+                border: 1px solid var(--border);
+                color: var(--text-muted);
+            }
+            .card .open {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                font-weight: 600;
+                font-size: 0.85rem;
+                color: var(--brand);
+            }
+            .card.conv .open {
+                color: var(--accent);
+            }
+
+            /* ---- Footer ------------------------------------------------ */
+            footer {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 1.5rem;
+                color: var(--text-subtle);
+                font-size: 0.78rem;
+                border-top: 1px solid var(--border);
+            }
+            footer a {
+                color: var(--text-muted);
+                text-decoration: none;
+            }
+            footer a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="app-header">
+            <div class="wrap">
+                <div class="brand">
+                    <div class="brand-mark">OJT</div>
+                    <div>
+                        <div class="brand-title">Odoo Jarvis IT Toolkit</div>
+                        <div class="brand-sub">
+                            Browser tools for the Italian Odoo localization
+                        </div>
+                    </div>
+                </div>
+                <div class="meta">
+                    <strong>Repository</strong>
+                    <a
+                        href="https://github.com/aylef-odoo/odoo-jarvis-it-toolkit"
+                        >github.com/aylef-odoo</a
+                    >
+                </div>
+            </div>
+        </header>
+
+        <nav class="app-nav">
+            <div class="wrap">
+                <a href="./" class="active">Home</a>
+                <a href="IT/e-invoice/generator/">SDI e-invoice XML</a>
+                <a href="IT/state-id-converter/">Province → state_id</a>
+            </div>
+        </nav>
+
+        <main>
+            <section class="hero">
+                <div class="eyebrow">🇮🇹 Italy · l10n_it</div>
+                <h1>Italian Odoo localization tools</h1>
+                <p>
+                    Small, single-page utilities that run entirely in your
+                    browser — nothing is uploaded, everything is processed
+                    locally. Pick a tool to get started.
+                </p>
+            </section>
+
+            <section class="cards">
+                <a class="card gen" href="IT/e-invoice/generator/">
+                    <div class="icon">🧾</div>
+                    <h2>SDI e-invoice XML generator</h2>
+                    <p>
+                        Build sample FatturaPA (FPR12) XML files — active and
+                        passive invoices — to test electronic-invoicing import
+                        in Odoo, without touching the SDI.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">FatturaPA</span>
+                        <span class="tag">FPR12</span>
+                        <span class="tag">SDI</span>
+                    </div>
+                    <span class="open">Open tool →</span>
+                </a>
+
+                <a class="card conv" href="IT/state-id-converter/">
+                    <div class="icon">🗺️</div>
+                    <h2>Province → state_id converter</h2>
+                    <p>
+                        Upload a CSV or Excel file: the tool detects the
+                        province column (abbreviation or full name) and maps it
+                        to Odoo's native external IDs
+                        (<code>base.state_it_xx</code>).
+                    </p>
+                    <div class="tags">
+                        <span class="tag">CSV / XLSX</span>
+                        <span class="tag">base.state_it_*</span>
+                        <span class="tag">import</span>
+                    </div>
+                    <span class="open">Open tool →</span>
+                </a>
+            </section>
+        </main>
+
+        <footer>
+            Part of the
+            <a href="https://github.com/aylef-odoo/odoo-jarvis-it-toolkit"
+                >Odoo Jarvis IT Toolkit</a
+            >
+            · tools run locally in your browser, no data leaves the page.
+        </footer>
+    </body>
+</html>

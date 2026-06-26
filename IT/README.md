@@ -10,6 +10,8 @@ Sample data and tooling to test the Italian Odoo localization (`l10n_it`) end-to
 
 ## 📂 Sections
 
+> 🌐 **Live tools (no install):** [SDI e-invoice XML generator](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/e-invoice/generator/) · [Province → `state_id` converter](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/state-id-converter/) — or browse from the [toolkit home](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/).
+
 | Folder | What's inside | When to use it |
 |--------|---------------|----------------|
 | [`demo-data/`](./demo-data/) | CSVs to bulk-import contacts, banks, invoices, and bills | Populate a blank Odoo DB with realistic Italian accounting records (B2B, B2C, PA, EU/Extra-EU, Split Payment, Reverse Charge, Exports). |

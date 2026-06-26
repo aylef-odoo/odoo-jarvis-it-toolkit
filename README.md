@@ -2,6 +2,8 @@
 
 A growing collection of **sample data, format examples, and small browser-based tools** to help test, demo, and prepare data for country-specific Odoo localizations.
 
+> 🌐 **Live tools:** **https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/** — the browser tools run online, nothing to install. (Hosted on GitHub Pages; everything runs locally in your browser.)
+
 The repository is organized **by country**. Each country folder contains its own demo data, format samples (e.g. e-invoicing, payment batches), and any localization-specific helper tools.
 
 ## 📦 Repository contents
