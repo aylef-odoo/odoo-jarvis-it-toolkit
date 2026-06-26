@@ -10,7 +10,7 @@ The repository is organized **by country**. Each country folder contains its own
 
 | Path | What it is |
 |------|------------|
-| [`IT/`](./IT/) | 🇮🇹 Italy — accounting demo data, SDI samples + XML generator, CBI payment examples, province → `state_id` converter |
+| [`IT/`](./IT/) | 🇮🇹 Italy — accounting demo data, SDI samples + XML generator, CBI payment examples, province → `state_id` converter, domain filter builder |
 | [`agents/`](./agents/) | 🤖 AI skill for [Google Gemini](https://gemini.google.com) — ask the assistant how any Odoo feature works and get a functional report. Runs as a no-install **Gem** in the browser, or via the **Gemini CLI** to save reports to files |
 
 Each country folder has its own `README.md` with an overview and links to each section. The `agents/` folder has its own `README.md` explaining the one skill and its two ways to run: a no-install **Gemini Gem** in the browser (the easiest start), or the **Gemini CLI** (installs the skill with `gemini skills install` and saves reports to files).
@@ -28,7 +28,7 @@ Head to [`agents/`](./agents/) — its README walks you through both options. Th
 ## 🧰 What's inside, in two categories
 
 * **Sample data** — CSV files designed for Odoo's standard bulk import (contacts, banks, invoices, bills, etc.).
-* **Tools** — single-file HTML utilities you can open directly in a browser (no build step, no upload — everything runs locally). Examples: the Italian SDI XML generator, the province → `state_id` converter.
+* **Tools** — single-file HTML utilities you can open directly in a browser (no build step, no upload — everything runs locally). Examples: the Italian SDI XML generator, the province → `state_id` converter, the domain filter builder.
 
 When a tool is **country-agnostic**, it will live under a top-level `tools/` folder (added when the first one lands). Country-specific tools stay under their country folder.
 

@@ -222,6 +222,9 @@
             .card.conv .icon {
                 background: var(--accent-50);
             }
+            .card.filter .icon {
+                background: var(--brand-50);
+            }
             .card h2 {
                 font-size: 1.05rem;
                 font-weight: 600;
@@ -305,6 +308,7 @@
                 <a href="./" class="active">Home</a>
                 <a href="IT/e-invoice/generator/">SDI e-invoice XML</a>
                 <a href="IT/state-id-converter/">Province → state_id</a>
+                <a href="IT/domain-filter/">Domain filter</a>
             </div>
         </nav>
 
@@ -349,6 +353,23 @@
                         <span class="tag">CSV / XLSX</span>
                         <span class="tag">base.state_it_*</span>
                         <span class="tag">import</span>
+                    </div>
+                    <span class="open">Open tool →</span>
+                </a>
+
+                <a class="card filter" href="IT/domain-filter/">
+                    <div class="icon">🧩</div>
+                    <h2>Domain filter builder</h2>
+                    <p>
+                        Paste a list of values and get a ready-to-use Odoo domain
+                        filter, with the right number of <code>"|"</code> OR
+                        operators, for server actions, filters, or
+                        <code>search</code> calls.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">domain</span>
+                        <span class="tag">ilike / in</span>
+                        <span class="tag">OR operators</span>
                     </div>
                     <span class="open">Open tool →</span>
                 </a>
