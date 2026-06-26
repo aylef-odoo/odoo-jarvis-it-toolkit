@@ -1,4 +1,4 @@
-# 🇮🇹 Italy — Odoo Localization Kit
+# 🇮🇹 Italy — Odoo Jarvis IT Toolkit
 
 Sample data and tooling to test the Italian Odoo localization (`l10n_it`) end-to-end: accounting demo records, electronic invoicing (SDI), CBI payment batches, and small browser-based helpers.
 

@@ -1,11 +1,11 @@
 id,move_type,partner_id/id,invoice_date,invoice_line_ids/name,invoice_line_ids/quantity,invoice_line_ids/price_unit,invoice_line_ids/tax_ids/id
-__export__.inv_sale_multi_01,out_invoice,__export__.res_partner_it_b2b,2026-04-10,"Server Dell PowerEdge",2,1200.00,account.1_22v
-__export__.inv_sale_multi_01,out_invoice,__export__.res_partner_it_b2b,2026-04-10,"Installazione e cablaggio",1,450.00,account.1_10vs
-__export__.inv_sale_multi_01,out_invoice,__export__.res_partner_it_b2b,2026-04-10,"Corso di formazione personale",1,300.00,account.1_00vs
-__export__.inv_sale_pa_02,out_invoice,__export__.res_partner_it_pa,2026-04-12,"Sviluppo Portale Web Cittadino",1,4500.00,account.1_22vsp_group
-__export__.inv_sale_pa_02,out_invoice,__export__.res_partner_it_pa,2026-04-12,"Canone manutenzione annuale",1,1200.00,account.1_22vsp_group
-__export__.inv_sale_eu_rc_03,out_invoice,__export__.res_partner_eu_b2b,2026-04-15,"Servizi di Marketing (Reverse Charge UE)",1,2500.00,account.1_00eus
-__export__.inv_sale_eu_rc_03,out_invoice,__export__.res_partner_eu_b2b,2026-04-15,"Rimborso spese di trasferta",1,350.00,account.1_00art15v
-__export__.inv_sale_extraeu_04,out_invoice,__export__.res_partner_extraeu_b2b,2026-04-18,"Licenza Software Enterprise",5,1000.00,account.1_00ex
-__export__.inv_sale_it_rc_05,out_invoice,__export__.res_partner_it_b2b,2026-04-20,"Servizi in appalto (Reverse Charge Interno)",1,800.00,account.1_0rc_n67
-__export__.inv_sale_b2c_06,out_invoice,__export__.res_partner_it_b2c,2026-04-22,"Riparazione Notebook",1,150.00,account.1_22v
+__export__.inv_sale_multi_01,out_invoice,__export__.res_partner_it_b2b,2026-06-10,"Server Dell PowerEdge",2,1200.00,account.4_22v
+__export__.inv_sale_multi_01,out_invoice,__export__.res_partner_it_b2b,2026-06-10,"Installazione e cablaggio",1,450.00,account.4_10vs
+__export__.inv_sale_multi_01,out_invoice,__export__.res_partner_it_b2b,2026-06-10,"Corso di formazione personale",1,300.00,account.4_00vs
+__export__.inv_sale_pa_02,out_invoice,__export__.res_partner_it_pa,2026-06-12,"Sviluppo Portale Web Cittadino",1,4500.00,account.4_22vsp_group
+__export__.inv_sale_pa_02,out_invoice,__export__.res_partner_it_pa,2026-06-12,"Canone manutenzione annuale",1,1200.00,account.4_22vsp_group
+__export__.inv_sale_eu_rc_03,out_invoice,__export__.res_partner_eu_b2b,2026-06-15,"Servizi di Marketing (Reverse Charge UE)",1,2500.00,account.4_00eus
+__export__.inv_sale_eu_rc_03,out_invoice,__export__.res_partner_eu_b2b,2026-06-15,"Rimborso spese di trasferta",1,350.00,account.4_00art15v
+__export__.inv_sale_extraeu_04,out_invoice,__export__.res_partner_extraeu_b2b,2026-06-18,"Licenza Software Enterprise",5,1000.00,account.4_00ex
+__export__.inv_sale_it_rc_05,out_invoice,__export__.res_partner_it_b2b,2026-06-20,"Servizi in appalto (Reverse Charge Interno)",1,800.00,account.4_0rc_n67
+__export__.inv_sale_b2c_06,out_invoice,__export__.res_partner_it_b2c,2026-06-22,"Riparazione Notebook",1,150.00,account.4_22v
