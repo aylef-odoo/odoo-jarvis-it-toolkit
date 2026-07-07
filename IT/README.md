@@ -34,3 +34,5 @@ IT/
 ├── state-id-converter/  # Browser tool: province → base.state_it_* external ID
 └── domain-filter/       # Browser tool: list of values → Odoo domain filter
 ```
+
+> ℹ️ An additional admin-only tool (`sdworx-export/`, Ferie `hr.leave` → SD Worx movements XML) is intentionally **not listed** on the toolkit home menu and is reachable only via its direct link.

@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Export ferie Odoo → XML movimenti SD Worx (IT)</title>
+</head>
+<body>
+<style>
+  :root{
+    --bg:#eef1f4; --panel:#ffffff; --panel-2:#f6f8fa; --line:#dbe1e8;
+    --ink:#182230; --muted:#5d6b7d; --faint:#8593a4;
+    --accent:#0e7c74; --accent-ink:#0a5b55; --accent-wash:#e2f2f0;
+    --ok:#1f8a52; --ok-wash:#e4f4ea;
+    --warn:#a9750a; --warn-wash:#fbefd6;
+    --crit:#c23a2b; --crit-wash:#fbe6e2;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+    --ui:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 1px 2px rgba(24,34,48,.06),0 8px 24px rgba(24,34,48,.06);
+    --radius:10px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0e141b; --panel:#161f29; --panel-2:#1c2733; --line:#2a3745;
+      --ink:#e7edf3; --muted:#9fb0c0; --faint:#6d7d8e;
+      --accent:#2dd4bf; --accent-ink:#7ff0e2; --accent-wash:#123832;
+      --ok:#40c479; --ok-wash:#12321f; --warn:#e0a842; --warn-wash:#3a2c0e;
+      --crit:#f0705f; --crit-wash:#3a1c17;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f4; --panel:#ffffff; --panel-2:#f6f8fa; --line:#dbe1e8;
+    --ink:#182230; --muted:#5d6b7d; --faint:#8593a4;
+    --accent:#0e7c74; --accent-ink:#0a5b55; --accent-wash:#e2f2f0;
+    --ok:#1f8a52; --ok-wash:#e4f4ea; --warn:#a9750a; --warn-wash:#fbefd6;
+    --crit:#c23a2b; --crit-wash:#fbe6e2;
+    --shadow:0 1px 2px rgba(24,34,48,.06),0 8px 24px rgba(24,34,48,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e141b; --panel:#161f29; --panel-2:#1c2733; --line:#2a3745;
+    --ink:#e7edf3; --muted:#9fb0c0; --faint:#6d7d8e;
+    --accent:#2dd4bf; --accent-ink:#7ff0e2; --accent-wash:#123832;
+    --ok:#40c479; --ok-wash:#12321f; --warn:#e0a842; --warn-wash:#3a2c0e;
+    --crit:#f0705f; --crit-wash:#3a1c17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.5;
+    -webkit-font-smoothing:antialiased;margin:0}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 96px}
+
+  /* header */
+  header.top{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+  .brand{display:flex;flex-direction:column;gap:6px;flex:1;min-width:260px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent-ink);font-weight:600}
+  h1{font-size:26px;line-height:1.15;margin:0;font-weight:750;letter-spacing:-.02em;text-wrap:balance}
+  .sub{color:var(--muted);font-size:14px;max-width:66ch}
+  .privacy{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 11px;margin-top:2px;align-self:flex-start}
+  .privacy b{color:var(--ok);font-weight:600}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+
+  /* step layout */
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden}
+  .step-hd{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);
+    background:linear-gradient(var(--panel),var(--panel-2))}
+  .num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent-ink);
+    background:var(--accent-wash);border:1px solid var(--line);width:26px;height:26px;border-radius:7px;
+    display:grid;place-items:center;flex-shrink:0}
+  .step-hd h2{font-size:15px;margin:0;font-weight:650;letter-spacing:-.01em}
+  .step-hd .hint{color:var(--faint);font-size:12.5px;margin-left:auto;text-align:right}
+  .step-bd{padding:18px}
+
+  /* drop zone */
+  .drop{display:block;border:1.5px dashed var(--line);border-radius:10px;background:var(--panel-2);
+    padding:30px 20px;text-align:center;cursor:pointer;transition:.15s}
+  .drop:hover,.drop.hot{border-color:var(--accent);background:var(--accent-wash)}
+  .drop input{display:none}
+  .drop .big{font-size:15px;font-weight:600}
+  .drop .small{color:var(--muted);font-size:12.5px;margin-top:4px}
+  .drop svg{width:30px;height:30px;color:var(--accent);margin-bottom:8px}
+
+  /* settings grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.01em}
+  .field .desc{font-size:11px;color:var(--faint);line-height:1.35}
+  input[type=text],input[type=number],select{font-family:var(--ui);font-size:13.5px;color:var(--ink);
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+  input[type=text].code,td input{font-family:var(--mono)}
+  input:focus,select:focus,.drop:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .check{display:flex;align-items:center;gap:9px;font-size:13.5px;padding:8px 0}
+  .check input{width:17px;height:17px;accent-color:var(--accent)}
+
+  /* tables */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th{background:var(--panel-2);text-align:left;font-weight:600;color:var(--muted);
+    font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;position:sticky;top:0}
+  td{padding:7px 12px;border-top:1px solid var(--line);vertical-align:middle}
+  td.num-c{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+  td input[type=text]{width:150px;padding:6px 9px;text-transform:uppercase}
+  tr.missing td input{border-color:var(--crit);background:var(--crit-wash)}
+  tr.auto td input{border-color:var(--warn)}
+  .scroll-y{max-height:360px;overflow-y:auto}
+  .tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;
+    padding:2px 7px;border-radius:6px;font-weight:600}
+  .tag.count{background:var(--panel-2);color:var(--muted);border:1px solid var(--line)}
+  .tag:empty{display:none}
+
+  /* summary bar */
+  .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .stat{background:var(--panel);padding:12px 14px}
+  .stat .v{font-size:22px;font-weight:720;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+  .stat.warn .v{color:var(--warn)} .stat.crit .v{color:var(--crit)} .stat.ok .v{color:var(--ok)}
+
+  /* buttons */
+  .row-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+  button{font-family:var(--ui);font-size:13.5px;font-weight:600;border-radius:8px;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 15px;transition:.12s}
+  button:hover{border-color:var(--accent)}
+  button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  button.primary:hover{filter:brightness(1.06)}
+  button.ghost{background:transparent}
+  button:disabled{opacity:.45;cursor:not-allowed;filter:none}
+  :root[data-theme="dark"] button.primary,@media(prefers-color-scheme:dark){button.primary{color:#06211e}}
+  .toolbtn{font-size:12px;padding:6px 10px}
+
+  /* preview */
+  pre.xml{font-family:var(--mono);font-size:12px;line-height:1.55;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:9px;padding:14px 16px;overflow:auto;max-height:440px;margin:0;
+    white-space:pre;tab-size:2}
+  pre.xml .t{color:var(--accent-ink)} pre.xml .a{color:var(--warn)} pre.xml .v{color:var(--ink)}
+  pre.xml .d{color:var(--faint)}
+
+  /* warnings */
+  .warns{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .warns li{font-size:12.5px;padding:9px 12px;border-radius:8px;border:1px solid var(--line);
+    display:flex;gap:9px;align-items:flex-start}
+  .warns li.w{background:var(--warn-wash);border-color:transparent}
+  .warns li.c{background:var(--crit-wash);border-color:transparent}
+  .warns li .ic{font-family:var(--mono);font-weight:700;flex-shrink:0}
+  .warns li.w .ic{color:var(--warn)} .warns li.c .ic{color:var(--crit)}
+
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+  .toolbar input[type=text]{max-width:220px}
+  .muted-note{font-size:12px;color:var(--faint);margin-top:6px}
+  .disabled-block{opacity:.5;pointer-events:none}
+  .theme-toggle{margin-left:auto}
+  .hidden{display:none}
+  a.inline{color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+  code.k{font-family:var(--mono);background:var(--panel-2);border:1px solid var(--line);
+    padding:1px 5px;border-radius:5px;font-size:.92em}
+
+  /* collapsible column map */
+  details.colmap-d{border:1px solid var(--line);border-radius:9px;background:var(--panel-2);padding:0}
+  details.colmap-d>summary{cursor:pointer;list-style:none;padding:11px 14px;font-size:12.5px;
+    font-weight:600;color:var(--muted);display:flex;align-items:center;gap:8px}
+  details.colmap-d>summary::-webkit-details-marker{display:none}
+  details.colmap-d>summary::before{content:"▸";color:var(--faint);transition:.15s}
+  details.colmap-d[open]>summary::before{transform:rotate(90deg);display:inline-block}
+  details.colmap-d>.grid{padding:0 14px 14px}
+
+  /* roster paste */
+  textarea.roster{width:100%;min-height:120px;resize:vertical;font-family:var(--mono);font-size:12px;
+    line-height:1.5;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+    border-radius:9px;padding:11px 13px;white-space:pre;tab-size:2}
+  textarea.roster:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .tag.count.ok{background:var(--ok-wash);color:var(--ok);border-color:transparent}
+  .tag.count.part{background:var(--warn-wash);color:var(--warn);border-color:transparent}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="kicker">Payroll IT · SD Worx</span>
+      <h1>Da export ferie Odoo a XML movimenti SD Worx</h1>
+      <p class="sub">Carica l'export di <code class="k">hr.leave</code> (CSV o XLSX), mappa i codici azienda,
+        dipendente e giustificativo, e genera il file <code class="k">&lt;Fornitura&gt;</code> nel tracciato
+        che il modulo <code class="k">l10n_it_hr_payroll_sd_worx</code> produce.</p>
+      <span class="privacy"><span class="dot"></span>&nbsp;Elaborazione <b>&nbsp;100% locale nel browser</b>&nbsp;· nessun dato lascia questa pagina</span>
+    </div>
+    <button class="ghost toolbtn theme-toggle" id="themeBtn" title="Cambia tema">◐ Tema</button>
+  </header>
+
+  <!-- STEP 1 -->
+  <section class="step">
+    <div class="step-hd"><span class="num">1</span><h2>Carica il file</h2>
+      <span class="hint">CSV o XLSX · export di <code class="k">Ferie (hr.leave)</code></span></div>
+    <div class="step-bd">
+      <label class="drop" id="drop" tabindex="0">
+        <input type="file" id="file" accept=".csv,.xlsx" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 16V4m0 0L7 9m5-5l5 5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a1 1 0 001 1h14a1 1 0 001-1v-2" stroke-linecap="round"/></svg>
+        <div class="big" id="dropTitle">Trascina qui il file o clicca per selezionarlo</div>
+        <div class="small" id="dropSub">Le colonne attese: Dipendente · Tipologia ferie · Data inizio · Data fine · Richiesto · Stato</div>
+      </label>
+      <div id="parseInfo" class="muted-note"></div>
+      <details id="colmap" class="hidden colmap-d" style="margin-top:16px">
+        <summary>Colonne rilevate automaticamente · clic per correggere</summary>
+        <div class="grid" id="colmapGrid"></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" id="settingsStep">
+    <div class="step-hd"><span class="num">2</span><h2>Impostazioni</h2>
+      <span class="hint">Valori globali della fornitura</span></div>
+    <div class="step-bd">
+      <div class="grid">
+        <div class="field">
+          <label for="coAz">Codice azienda SD Worx</label>
+          <input type="text" class="code" id="coAz" placeholder="es. 000009" />
+          <span class="desc">Attributo <code class="k">CodAziendaUfficiale</code></span>
+        </div>
+        <div class="field">
+          <label for="hpd">Ore per giornata intera</label>
+          <input type="number" id="hpd" value="8" min="1" max="24" step="0.5" />
+          <span class="desc">Usato per convertire i giorni in ore</span>
+        </div>
+        <div class="field">
+          <label for="stateFilter">Filtro stato</label>
+          <select id="stateFilter"><option value="Approvata">Solo "Approvata"</option><option value="__all__">Tutti gli stati</option></select>
+          <span class="desc">Esclude richieste non approvate</span>
+        </div>
+        <div class="field">
+          <label for="period">Periodo (opzionale)</label>
+          <input type="text" id="period" placeholder="AAAA-MM · vuoto = tutto" />
+          <span class="desc">Tiene solo i movimenti di quel mese</span>
+        </div>
+      </div>
+      <div style="margin-top:6px">
+        <label class="check"><input type="checkbox" id="skipWknd" checked /> Escludi sabato e domenica nell'espansione dei periodi multi-giorno</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3 giustificativi -->
+  <section class="step" id="typeStep">
+    <div class="step-hd"><span class="num">3</span><h2>Mappa i giustificativi</h2>
+      <span class="hint">Tipologia ferie → codice SD Worx</span></div>
+    <div class="step-bd">
+      <p class="muted-note" style="margin-top:0">I codici sono precompilati con ipotesi ragionevoli (<code class="k">FER</code>, <code class="k">MA</code>, <code class="k">T35</code>…) ma i codici reali dipendono dalla vostra anagrafica SD Worx: <b>verificateli</b>. In rosso i codici mancanti, in giallo quelli auto-suggeriti da confermare.</p>
+      <div class="tbl-wrap" id="typeTblWrap"><table id="typeTbl"><thead><tr><th>Tipologia ferie (dal file)</th><th style="text-align:right">Righe</th><th>Codice giustificativo</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- STEP 4 dipendenti -->
+  <section class="step" id="empStep">
+    <div class="step-hd"><span class="num">4</span><h2>Mappa i dipendenti</h2>
+      <span class="hint">Nome → codice SD Worx</span></div>
+    <div class="step-bd">
+      <p class="muted-note" style="margin-top:0">Il file ferie contiene solo "Nome (login)", non il codice SD Worx. <b>Incolla l'anagrafica Zucchetti <code class="k">Ele DIP</code></b> (o un sottoinsieme con Cognome, Nome e Dipendente): i codici vengono abbinati per nome, e il codice azienda viene compilato in automatico.</p>
+      <textarea id="roster" class="roster" spellcheck="false" placeholder="Incolla qui l'export Ele DIP di Zucchetti, con l'intestazione…&#10;Codice azienda;Denominazione;Data inizio periodo;Data fine periodo;Dipendente;Cognome;Nome;Codice fiscale;…&#10;000123;DITTA DEMO SRL;01/01/2020;31/12/2020;0000001;ROSSI;PIPPO;RSSPPP80A01H501Z;01/01/2019;…"></textarea>
+      <div class="row-actions" style="margin-top:12px">
+        <button class="primary" id="matchBtn">Abbina automaticamente</button>
+        <button class="toolbtn" id="useLogin">Usa il login come codice</button>
+        <span class="tag count" id="rosterInfo"></span>
+      </div>
+      <div class="toolbar" style="margin-top:18px">
+        <input type="text" id="empSearch" placeholder="Cerca dipendente…" />
+        <span class="tag count" id="empProgress"></span>
+      </div>
+      <div class="tbl-wrap scroll-y" id="empTblWrap"><table id="empTbl"><thead><tr><th>Dipendente</th><th>Login</th><th style="text-align:right">Righe</th><th>Codice SD Worx</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- STEP 5 output -->
+  <section class="step" id="outStep">
+    <div class="step-hd"><span class="num">5</span><h2>Anteprima e download</h2>
+      <span class="hint">Tracciato <code class="k">&lt;Fornitura&gt;</code></span></div>
+    <div class="step-bd">
+      <div class="summary" id="summary"></div>
+      <div class="row-actions">
+        <button class="primary" id="genBtn">Genera XML</button>
+        <button id="dlBtn" disabled>Scarica .xml</button>
+        <button class="ghost" id="copyBtn" disabled>Copia</button>
+      </div>
+      <ul class="warns" id="warns"></ul>
+      <div style="margin-top:16px"><pre class="xml" id="preview">Carica un file e completa le mappature, poi premi <b>Genera XML</b>.</pre></div>
+    </div>
+  </section>
+</div>
+
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const state={rows:[],headers:[],col:{},types:new Map(),emps:new Map(),fileName:""};
+const FIELDS=[["employee","Dipendente"],["type","Tipologia ferie"],["start","Data inizio"],["end","Data fine"],["dur","Richiesto"],["stato","Stato"]];
+
+/* ---------- theme ---------- */
+$("#themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement;
+  const cur=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+  r.setAttribute("data-theme",cur==="dark"?"light":"dark");
+});
+
+/* ---------- file input ---------- */
+const drop=$("#drop"),fileInput=$("#file");
+["dragenter","dragover"].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add("hot");}));
+["dragleave","drop"].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove("hot");}));
+drop.addEventListener("drop",ev=>{if(ev.dataTransfer.files[0])handleFile(ev.dataTransfer.files[0]);});
+drop.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();fileInput.click();}});
+fileInput.addEventListener("change",()=>{if(fileInput.files[0])handleFile(fileInput.files[0]);});
+
+async function handleFile(f){
+  state.fileName=f.name.replace(/\.[^.]+$/,"");
+  $("#dropTitle").textContent=f.name;
+  $("#parseInfo").textContent="Lettura in corso…";
+  try{
+    let matrix;
+    if(/\.xlsx$/i.test(f.name)) matrix=await readXlsx(await f.arrayBuffer());
+    else matrix=parseCsv(await f.text());
+    if(!matrix.length) throw new Error("File vuoto");
+    ingest(matrix);
+    $("#dropSub").textContent=`${f.name} caricato`;
+  }catch(err){
+    $("#parseInfo").innerHTML=`<span style="color:var(--crit)">Errore: ${esc(err.message)}</span>`;
+    console.error(err);
+  }
+}
+
+/* ---------- CSV parser (quoted, delimiter auto) ---------- */
+function parseCsv(text){
+  text=text.replace(/^﻿/,"");
+  const head=text.slice(0,text.indexOf("\n"));
+  const delim=(head.match(/;/g)||[]).length>(head.match(/,/g)||[]).length?";":",";
+  const rows=[];let row=[],cell="",q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else q=false; } else cell+=c; }
+    else{ if(c==='"')q=true;
+      else if(c===delim){row.push(cell);cell="";}
+      else if(c==="\n"){row.push(cell);rows.push(row);row=[];cell="";}
+      else if(c==="\r"){}
+      else cell+=c; }
+  }
+  if(cell.length||row.length){row.push(cell);rows.push(row);}
+  return rows.filter(r=>r.some(x=>x!==""));
+}
+
+/* ---------- XLSX reader (no libs, DecompressionStream) ---------- */
+async function readXlsx(buf){
+  const files=await unzip(buf);
+  const shared=[];
+  if(files["xl/sharedStrings.xml"]){
+    const doc=new DOMParser().parseFromString(await files["xl/sharedStrings.xml"](),"application/xml");
+    for(const si of doc.getElementsByTagName("si")) shared.push(si.textContent);
+  }
+  const sheetName=Object.keys(files).filter(n=>/^xl\/worksheets\/sheet\d+\.xml$/.test(n))
+    .sort((a,b)=>(+a.match(/\d+/)[0])-(+b.match(/\d+/)[0]))[0];
+  if(!sheetName) throw new Error("Nessun foglio nel file XLSX");
+  const doc=new DOMParser().parseFromString(await files[sheetName](),"application/xml");
+  const out=[];
+  for(const r of doc.getElementsByTagName("row")){
+    const cells=[];let maxc=0;
+    for(const c of r.getElementsByTagName("c")){
+      const ref=c.getAttribute("r")||"";const ci=colIdx(ref);
+      const t=c.getAttribute("t");let v="";
+      const vEl=c.getElementsByTagName("v")[0];
+      const isEl=c.getElementsByTagName("t")[0];
+      if(t==="s"&&vEl) v=shared[+vEl.textContent]??"";
+      else if(t==="inlineStr"&&isEl) v=isEl.textContent;
+      else if(vEl) v=vEl.textContent;
+      cells[ci]=v;maxc=Math.max(maxc,ci);
+    }
+    for(let i=0;i<=maxc;i++) if(cells[i]==null)cells[i]="";
+    if(cells.some(x=>x!=="")) out.push(cells);
+  }
+  return out;
+}
+function colIdx(ref){let s=ref.replace(/[0-9]/g,""),n=0;for(const ch of s)n=n*26+(ch.charCodeAt(0)-64);return n-1;}
+async function unzip(ab){
+  const u8=new Uint8Array(ab),dv=new DataView(ab);
+  let eo=-1;for(let i=u8.length-22;i>=0;i--){if(dv.getUint32(i,true)===0x06054b50){eo=i;break;}}
+  if(eo<0)throw new Error("XLSX non valido (EOCD assente)");
+  const cnt=dv.getUint16(eo+10,true);let p=dv.getUint32(eo+16,true);
+  const files={};
+  for(let n=0;n<cnt;n++){
+    if(dv.getUint32(p,true)!==0x02014b50)break;
+    const method=dv.getUint16(p+10,true),comp=dv.getUint32(p+20,true);
+    const nl=dv.getUint16(p+28,true),el=dv.getUint16(p+32,true),cl=dv.getUint16(p+34,true);
+    const lo=dv.getUint32(p+42,true);
+    const name=new TextDecoder().decode(u8.subarray(p+46,p+46+nl));
+    const lnl=dv.getUint16(lo+26,true),lel=dv.getUint16(lo+28,true);
+    const start=lo+30+lnl+lel;const data=u8.subarray(start,start+comp);
+    files[name]=async()=>{
+      if(method===0)return new TextDecoder().decode(data);
+      const s=new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+      return new TextDecoder().decode(await new Response(s).arrayBuffer());
+    };
+    p+=46+nl+el+cl;
+  }
+  return files;
+}
+
+/* ---------- ingest matrix -> rows ---------- */
+function ingest(matrix){
+  state.headers=matrix[0].map(h=>String(h).trim());
+  state.rows=matrix.slice(1).map(r=>r.map(x=>String(x)));
+  autoMapColumns();
+  buildColMapUI();
+  rebuild();
+  $("#parseInfo").innerHTML=`<b>${state.rows.length}</b> righe lette · ${state.headers.length} colonne.`;
+}
+function norm(s){return String(s).toLowerCase().replace(/[^a-z]/g,"");}
+function autoMapColumns(){
+  const H=state.headers.map(norm);
+  const guess={employee:["dipendente","employee"],type:["tipologiaferie","tipologia","leavetype","type"],
+    start:["datainizio","datefrom","startdate","start"],end:["datafine","dateto","enddate","end"],
+    dur:["richiesto","duration","requested"],stato:["stato","state","status"]};
+  state.col={};
+  for(const[k,cands]of Object.entries(guess)){
+    let idx=-1;
+    for(const c of cands){idx=H.findIndex(h=>h===c);if(idx>=0)break;}
+    if(idx<0)for(const c of cands){idx=H.findIndex(h=>h.includes(c));if(idx>=0)break;}
+    state.col[k]=idx;
+  }
+}
+function buildColMapUI(){
+  $("#colmap").classList.remove("hidden");
+  const g=$("#colmapGrid");g.innerHTML="";
+  for(const[k,label]of FIELDS){
+    const f=document.createElement("div");f.className="field";
+    const opts=state.headers.map((h,i)=>`<option value="${i}" ${state.col[k]===i?"selected":""}>${esc(h)}</option>`).join("");
+    f.innerHTML=`<label>${label}</label><select data-k="${k}"><option value="-1">— non presente —</option>${opts}</select>`;
+    g.appendChild(f);
+  }
+  $$("#colmapGrid select").forEach(s=>s.addEventListener("change",()=>{state.col[s.dataset.k]=+s.value;rebuild();}));
+}
+
+/* ---------- rebuild derived state ---------- */
+function cell(r,k){const i=state.col[k];return i>=0&&i<r.length?r[i]:"";}
+function activeRows(){
+  const sf=$("#stateFilter").value;
+  return state.rows.filter(r=>sf==="__all__"||norm(cell(r,"stato"))===norm(sf));
+}
+function rebuild(){
+  const rows=activeRows();
+  // types
+  const tcount=new Map();
+  for(const r of rows){const t=cell(r,"type").trim();if(t)tcount.set(t,(tcount.get(t)||0)+1);}
+  for(const t of tcount.keys()) if(!state.types.has(t)){const g=guessType(t);state.types.set(t,{code:g.code,auto:g.auto});}
+  for(const t of[...state.types.keys()]) if(!tcount.has(t))state.types.delete(t);
+  renderTypeTable(tcount);
+  // employees
+  const ecount=new Map();
+  for(const r of rows){const e=cell(r,"employee").trim();if(e)ecount.set(e,(ecount.get(e)||0)+1);}
+  for(const e of ecount.keys()) if(!state.emps.has(e))state.emps.set(e,{code:""});
+  for(const e of[...state.emps.keys()]) if(!ecount.has(e))state.emps.delete(e);
+  renderEmpTable(ecount);
+  renderSummary();
+}
+function guessType(name){
+  const n=name.toLowerCase();
+  if(n.includes("malatt"))return{code:"MA",auto:false};
+  if(n.includes("rol"))return{code:"T35",auto:false};
+  if(n.includes("festiv"))return{code:"EXF",auto:true};
+  if(n.includes("ferie"))return{code:"FER",auto:false};
+  if(n.includes("esame"))return{code:"",auto:false};
+  return{code:"",auto:false};
+}
+function loginOf(name){const m=String(name).match(/\(([^)]+)\)\s*$/);return m?m[1]:"";}
+function nameOf(name){return String(name).replace(/\s*\([^)]+\)\s*$/,"").trim();}
+
+/* ---------- render type table ---------- */
+function renderTypeTable(tcount){
+  const tb=$("#typeTbl tbody");tb.innerHTML="";
+  [...tcount.entries()].sort((a,b)=>b[1]-a[1]).forEach(([t,c])=>{
+    const d=state.types.get(t);const tr=document.createElement("tr");
+    tr.className=!d.code?"missing":(d.auto?"auto":"");
+    tr.innerHTML=`<td>${esc(t)}</td><td class="num-c">${c}</td>
+      <td><input type="text" class="code" value="${esc(d.code)}" data-t="${esc(t)}" placeholder="—" /></td>`;
+    tb.appendChild(tr);
+  });
+  $$("#typeTbl input").forEach(inp=>inp.addEventListener("input",()=>{
+    const d=state.types.get(inp.dataset.t);d.code=inp.value.trim().toUpperCase();d.auto=false;
+    inp.closest("tr").className=d.code?"":"missing";renderSummary();
+  }));
+}
+/* ---------- render employee table ---------- */
+function renderEmpTable(ecount){
+  const tb=$("#empTbl tbody");tb.innerHTML="";
+  const q=norm($("#empSearch").value);
+  [...ecount.entries()].sort((a,b)=>nameOf(a[0]).localeCompare(nameOf(b[0]))).forEach(([e,c])=>{
+    if(q&&!norm(e).includes(q))return;
+    const d=state.emps.get(e);const tr=document.createElement("tr");
+    tr.className=d.code?"":"missing";
+    tr.innerHTML=`<td>${esc(nameOf(e))}</td><td class="num-c" style="text-align:left;color:var(--faint)">${esc(loginOf(e))}</td>
+      <td class="num-c">${c}</td>
+      <td><input type="text" class="code" value="${esc(d.code)}" data-e="${esc(e)}" placeholder="—" /></td>`;
+    tb.appendChild(tr);
+  });
+  $$("#empTbl input").forEach(inp=>inp.addEventListener("input",()=>{
+    const d=state.emps.get(inp.dataset.e);d.code=inp.value.trim();
+    inp.closest("tr").className=d.code?"":"missing";updateEmpProgress();renderSummary();
+  }));
+  updateEmpProgress();
+}
+function updateEmpProgress(){
+  const tot=state.emps.size,done=[...state.emps.values()].filter(d=>d.code).length;
+  $("#empProgress").textContent=`${done}/${tot} mappati`;
+}
+$("#empSearch").addEventListener("input",()=>renderEmpTable(countBy("employee")));
+$("#stateFilter").addEventListener("change",rebuild);
+function countBy(k){const m=new Map();for(const r of activeRows()){const v=cell(r,k).trim();if(v)m.set(v,(m.get(v)||0)+1);}return m;}
+
+$("#useLogin").addEventListener("click",()=>{
+  for(const[e,d]of state.emps) if(!d.code){const l=loginOf(e);if(l)d.code=l;}
+  renderEmpTable(countBy("employee"));renderSummary();
+});
+/* ---- roster (Ele DIP) paste + name matching ---- */
+function normTokens(s){
+  return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/['`.]/g,"").replace(/[^a-z\s]/g," ").split(/\s+/).filter(Boolean);
+}
+const keyOf=t=>[...t].sort().join(" ");
+function parseRoster(text){
+  const lines=text.split(/\r?\n/).map(l=>l.replace(/\s+$/,"")).filter(l=>l.trim());
+  if(!lines.length)return{entries:[],company:""};
+  let d=";",best=-1;
+  for(const c of[";","\t",","]){const n=lines[0].split(c).length-1;if(n>best){best=n;d=c;}}
+  const sp=l=>l.split(d).map(c=>c.replace(/^"|"$/g,"").trim());
+  const low=sp(lines[0]).map(x=>x.toLowerCase());
+  const hasH=low.some(h=>/cognome|dipendent|matricola/.test(h));
+  let iCode=-1,iCog=-1,iNom=-1,iAz=-1,body;
+  if(hasH){
+    iCode=low.findIndex(h=>/^dipendent|matricola/.test(h));
+    if(iCode<0)iCode=low.findIndex(h=>/\bcodice\b/.test(h)&&!/azienda|fiscale/.test(h));
+    iCog=low.findIndex(h=>/cognome/.test(h));
+    iNom=low.findIndex(h=>/^nome$/.test(h));
+    iAz=low.findIndex(h=>/codice azienda/.test(h));
+    body=lines.slice(1).map(sp);
+  }else body=lines.map(sp);
+  const entries=[];let company="";
+  for(const r of body){
+    if(!r.length||r.every(x=>!x))continue;
+    let code="",tokens=[];
+    if(hasH){
+      code=(r[iCode]||"").trim();
+      tokens=[...normTokens(r[iNom]||""),...normTokens(r[iCog]||"")];
+      if(iAz>=0&&!company&&r[iAz])company=r[iAz].trim();
+    }else{
+      let ci=-1;for(let i=r.length-1;i>=0;i--){if(/^[\d\s]+$/.test(r[i])&&/\d/.test(r[i])){ci=i;break;}}
+      code=ci>=0?r[ci].trim():"";
+      tokens=r.filter((_,i)=>i!==ci).flatMap(normTokens);
+    }
+    code=code.replace(/["']/g,"").trim();
+    if(/[;,\t]/.test(code))code=code.split(/[;,\t]/)[0].trim(); // safety net: code must never hold a delimiter
+    if(code&&tokens.length)entries.push({code,tokens,key:keyOf(tokens)});
+  }
+  return{entries,company};
+}
+$("#matchBtn").addEventListener("click",()=>{
+  if(!state.emps.size){alert("Carica prima il file ferie.");return;}
+  const{entries,company}=parseRoster($("#roster").value);
+  if(!entries.length){setRosterInfo("Nessuna riga valida nell'anagrafica","part");return;}
+  const byKey=new Map();for(const e of entries)byKey.set(e.key,e);
+  let matched=0;const unresolved=[];
+  for(const[emp,d]of state.emps){
+    const t=normTokens(nameOf(emp)),k=keyOf(t);
+    let hit=byKey.get(k);
+    if(!hit){
+      const cand=entries.filter(e=>e.tokens.every(x=>t.includes(x))||t.every(x=>e.tokens.includes(x)));
+      if(cand.length===1)hit=cand[0];
+    }
+    if(hit){d.code=hit.code;matched++;}else unresolved.push(nameOf(emp));
+  }
+  if(company&&!$("#coAz").value.trim())$("#coAz").value=company;
+  state.unresolved=unresolved;
+  const tot=state.emps.size;
+  setRosterInfo(`${matched}/${tot} abbinati${company?` · azienda ${company}`:""}${unresolved.length?` · ${unresolved.length} da completare`:""}`,matched===tot?"ok":"part");
+  renderEmpTable(countBy("employee"));renderSummary();
+});
+function setRosterInfo(txt,cls){const el=$("#rosterInfo");el.textContent=txt;el.className="tag count "+(cls||"");}
+
+/* ---------- duration / dates ---------- */
+function parseDuration(s,hpd){
+  s=String(s).trim().toLowerCase();
+  if(s.includes(":")){const[h,m]=s.split(/\s+/)[0].split(":").map(Number);return(h||0)+(m||0)/60;}
+  const num=parseFloat(s.replace(",","."));if(isNaN(num))return 0;
+  if(/day|giorn/.test(s))return num*hpd;
+  if(/hour|ore|ora/.test(s))return num;
+  return num*hpd;
+}
+function toDate(v){
+  if(v==null)return null;const s=String(v).trim();
+  if(/^\d+(\.\d+)?$/.test(s)){const n=parseFloat(s);if(n>20000&&n<90000)return new Date(Math.round((n-25569)*86400000));}
+  let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m)return new Date(+m[1],+m[2]-1,+m[3]);
+  m=s.match(/^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})/);if(m)return new Date(+m[3],+m[2]-1,+m[1]);
+  const d=new Date(s);return isNaN(d)?null:d;
+}
+const pad=n=>String(n).padStart(2,"0");
+const fmtDate=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+
+/* expand one leave row into [{date,hours}] */
+function expand(row,hpd,skipWknd){
+  const total=parseDuration(cell(row,"dur"),hpd);
+  const d0=toDate(cell(row,"start")),d1=toDate(cell(row,"end"))||d0;
+  if(!d0)return[];
+  const days=[];const d=new Date(d0.getFullYear(),d0.getMonth(),d0.getDate());
+  const end=new Date((d1||d0).getFullYear(),(d1||d0).getMonth(),(d1||d0).getDate());
+  while(d<=end){const wd=d.getDay();if(!skipWknd||(wd!==0&&wd!==6))days.push(new Date(d));d.setDate(d.getDate()+1);}
+  if(!days.length)days.push(new Date(d0.getFullYear(),d0.getMonth(),d0.getDate()));
+  if(days.length===1)return[{date:days[0],hours:total}];
+  const out=[];let rem=total;
+  for(const dd of days){const h=Math.min(rem,hpd);if(h<=0.0001)break;out.push({date:dd,hours:h});rem-=h;}
+  return out;
+}
+function hm(hours){let h=Math.floor(hours+1e-9);let m=Math.round((hours-h)*60);if(m===60){h++;m=0;}return[h,m];}
+
+/* ---------- build XML ---------- */
+function buildXml(){
+  const hpd=parseFloat($("#hpd").value)||8;
+  const skip=$("#skipWknd").checked;
+  const coAz=$("#coAz").value.trim();
+  const period=$("#period").value.trim();
+  const warns=[];
+  if(!coAz)warns.push(["c","Codice azienda mancante: l'attributo CodAziendaUfficiale sarà vuoto."]);
+  const byEmp=new Map();let movTot=0,excl=0;
+  const missType=new Set(),missEmp=new Set();
+  for(const r of activeRows()){
+    const e=cell(r,"employee").trim(),t=cell(r,"type").trim();
+    const ec=state.emps.get(e)?.code||"",tc=state.types.get(t)?.code||"";
+    if(!ec){missEmp.add(e);excl++;continue;}
+    if(!tc){missType.add(t);excl++;continue;}
+    for(const mv of expand(r,hpd,skip)){
+      if(period&&fmtDate(mv.date).slice(0,7)!==period)continue;
+      const[h,m]=hm(mv.hours);if(h<=0&&m<=0)continue;
+      if(!byEmp.has(ec))byEmp.set(ec,[]);
+      byEmp.get(ec).push({code:tc,date:fmtDate(mv.date),h,m});movTot++;
+    }
+  }
+  for(const t of missType)warns.push(["c",`Tipologia senza codice, righe escluse: "${t}".`]);
+  if(missEmp.size)warns.push(["c",`${missEmp.size} dipendenti senza codice: relative righe escluse.`]);
+  // sort movimenti by date within employee
+  for(const arr of byEmp.values())arr.sort((a,b)=>a.date.localeCompare(b.date));
+  let xml='<?xml version="1.0" encoding="utf-8"?>\n<Fornitura>\n';
+  for(const[ec,movs]of[...byEmp.entries()].sort((a,b)=>a[0].localeCompare(b[0]))){
+    xml+=`  <Dipendente CodAziendaUfficiale="${esc(coAz)}" CodDipendenteUfficiale="${esc(ec)}">\n`;
+    xml+=`    <Movimenti GenerazioneAutomaticaDaTeorico="N">\n`;
+    for(const m of movs){
+      xml+=`      <Movimento>\n`;
+      xml+=`        <CodGiustificativoRilPres>${esc(m.code)}</CodGiustificativoRilPres>\n`;
+      xml+=`        <CodGiustificativoUfficiale>${esc(m.code)}</CodGiustificativoUfficiale>\n`;
+      xml+=`        <Data>${m.date}</Data>\n`;
+      xml+=`        <NumOre>${m.h}</NumOre>\n`;
+      if(m.m>0)xml+=`        <NumMinuti>${m.m}</NumMinuti>\n`;
+      xml+=`      </Movimento>\n`;
+    }
+    xml+=`    </Movimenti>\n  </Dipendente>\n`;
+  }
+  xml+='</Fornitura>\n';
+  return{xml,warns,stats:{emps:byEmp.size,mov:movTot,excl}};
+}
+
+/* ---------- summary + generate ---------- */
+function renderSummary(){
+  const rows=activeRows();
+  const emps=state.emps.size,types=state.types.size;
+  const missE=[...state.emps.values()].filter(d=>!d.code).length;
+  const missT=[...state.types.values()].filter(d=>!d.code).length;
+  $("#summary").innerHTML=`
+    ${stat(rows.length,"Righe attive","")}
+    ${stat(emps,"Dipendenti","")}
+    ${stat(types,"Tipologie","")}
+    ${stat(missT,"Tipol. da mappare",missT?"crit":"ok")}
+    ${stat(missE,"Dipend. da mappare",missE?"warn":"ok")}`;
+}
+function stat(v,l,cls){return`<div class="stat ${cls}"><div class="v">${v}</div><div class="l">${l}</div></div>`;}
+
+let lastXml="";
+$("#genBtn").addEventListener("click",()=>{
+  if(!state.rows.length){alert("Carica prima un file.");return;}
+  const{xml,warns,stats}=buildXml();lastXml=xml;
+  $("#preview").innerHTML=highlight(xml);
+  const wl=$("#warns");wl.innerHTML="";
+  const ok=document.createElement("li");ok.className="w";ok.style.background="var(--ok-wash)";
+  ok.innerHTML=`<span class="ic" style="color:var(--ok)">✓</span><span>Generati <b>${stats.mov}</b> movimenti per <b>${stats.emps}</b> dipendenti.${stats.excl?` <b>${stats.excl}</b> righe escluse (vedi sotto).`:""}</span>`;
+  wl.appendChild(ok);
+  for(const[lvl,msg]of warns){const li=document.createElement("li");li.className=lvl;
+    li.innerHTML=`<span class="ic">${lvl==="c"?"!":"·"}</span><span>${esc(msg)}</span>`;wl.appendChild(li);}
+  $("#dlBtn").disabled=!stats.mov;$("#copyBtn").disabled=!stats.mov;
+});
+$("#dlBtn").addEventListener("click",()=>{
+  const month=($("#period").value.trim()||"export").replace(/[^0-9A-Za-z_-]/g,"");
+  const blob=new Blob([lastXml],{type:"application/xml"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=`SDWorx_${state.fileName||"movimenti"}.xml`;a.click();URL.revokeObjectURL(a.href);
+});
+$("#copyBtn").addEventListener("click",async()=>{
+  await navigator.clipboard.writeText(lastXml);
+  const b=$("#copyBtn");const o=b.textContent;b.textContent="Copiato ✓";setTimeout(()=>b.textContent=o,1200);
+});
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function highlight(xml){
+  return esc(xml)
+    .replace(/(&lt;\?[^]*?\?&gt;)/g,'<span class="d">$1</span>')
+    .replace(/(&lt;\/?)([A-Za-z]+)/g,'$1<span class="t">$2</span>')
+    .replace(/([A-Za-z]+)=(&quot;[^&]*&quot;)/g,'<span class="a">$1</span>=<span class="v">$2</span>');
+}
+renderSummary();
+</script>
+</body>
+</html>
