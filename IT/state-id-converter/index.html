@@ -518,6 +518,7 @@
             /* ---- Country toggle ------------------------------------------ */
             .country-toggle {
                 display: inline-flex;
+                flex-wrap: wrap;
                 gap: 4px;
                 margin-top: 1.1rem;
                 padding: 4px;
@@ -656,6 +657,15 @@
                     >
                         🇨🇭 Svizzera · cantoni
                     </button>
+                    <button
+                        type="button"
+                        class="ct-btn"
+                        data-country="AUTO"
+                        role="tab"
+                        aria-selected="false"
+                    >
+                        🌍 Auto · misto
+                    </button>
                 </div>
                 <p class="country-note">
                     Per la Svizzera riconosco i 26 cantoni in tedesco, italiano
@@ -663,8 +673,13 @@
                     <code>Genève</code>) e li mappo sul record canonico
                     <code>base.state_ch_xx</code>. Alcune sigle coincidono tra i
                     due Paesi (<code>AG</code>, <code>GE</code>, <code>FR</code>,
-                    <code>SO</code>, <code>LU</code>…): seleziona il Paese giusto
-                    prima di convertire.
+                    <code>SO</code>, <code>LU</code>…): seleziona il Paese giusto,
+                    oppure usa <strong>Auto</strong> per un file con contatti di
+                    più Paesi. In Auto, se il file ha una colonna
+                    <code>Country</code>/<code>Paese</code> la uso per assegnare
+                    a ogni riga il Paese corretto (incluse le sigle ambigue);
+                    senza quella colonna converto solo i valori riconosciuti in
+                    un unico Paese.
                 </p>
             </section>
 
@@ -1140,6 +1155,52 @@
                 return null;
             }
 
+            // Country column detection + value → country-key mapping. Used by the
+            // "Auto" mode so a single file can mix contacts from several countries.
+            const COUNTRY_ALIASES = {
+                it: "IT",
+                ita: "IT",
+                italy: "IT",
+                italia: "IT",
+                italie: "IT",
+                italien: "IT",
+                ch: "CH",
+                che: "CH",
+                switzerland: "CH",
+                svizzera: "CH",
+                suisse: "CH",
+                schweiz: "CH",
+                svizra: "CH",
+            };
+
+            function countryFromValue(v) {
+                if (v == null) return null;
+                return COUNTRY_ALIASES[normalize(v)] || null;
+            }
+
+            function findCountryColumn(fields) {
+                const exact = [
+                    /^country$/i,
+                    /^country_id$/i,
+                    /^country_id\/id$/i,
+                    /^country_code$/i,
+                    /^paese$/i,
+                    /^nazione$/i,
+                    /^pays$/i,
+                    /^land$/i,
+                ];
+                for (const p of exact) {
+                    const col = fields.find((f) => p.test(String(f).trim()));
+                    if (col) return col;
+                }
+                const partial = [/country/i, /paese/i, /nazione/i];
+                for (const p of partial) {
+                    const col = fields.find((f) => p.test(String(f)));
+                    if (col) return col;
+                }
+                return null;
+            }
+
             function detectFormat(values) {
                 const nonEmpty = values.filter(
                     (v) => v != null && String(v).trim(),
@@ -1155,12 +1216,13 @@
                 return "mixed";
             }
 
-            function toExternalId(value) {
+            function toExternalIdForCountry(countryKey, value) {
                 if (value == null) return { ok: false, ext: "" };
                 const trimmed = String(value).trim();
                 if (!trimmed) return { ok: false, ext: "" };
 
-                const country = COUNTRIES[currentCountry];
+                const country = COUNTRIES[countryKey];
+                if (!country) return { ok: false, ext: "" };
 
                 // Try as 2-letter code
                 if (/^[A-Za-z]{2}$/.test(trimmed)) {
@@ -1185,6 +1247,43 @@
                 return { ok: false, ext: "" };
             }
 
+            // Resolve a single row. In "Auto" mode a country column (if present)
+            // scopes the lookup — this is what disambiguates codes shared by more
+            // than one country (AG, GE, FR, SO, LU, AR, BL, BS, GR). Without a
+            // country column a value is accepted only if exactly one country
+            // recognises it; a value valid in several is flagged as ambiguous.
+            function convertRow(row, provinceCol) {
+                const value = row == null ? null : row[provinceCol];
+
+                if (currentCountry !== "AUTO") {
+                    return toExternalIdForCountry(currentCountry, value);
+                }
+
+                let forced = null;
+                if (currentCountryCol && row) {
+                    forced = countryFromValue(row[currentCountryCol]);
+                }
+                const candidates = forced ? [forced] : Object.keys(COUNTRIES);
+
+                const hits = [];
+                for (const c of candidates) {
+                    const r = toExternalIdForCountry(c, value);
+                    if (r.ok) hits.push({ country: c, ext: r.ext });
+                }
+                if (hits.length === 1) {
+                    return { ok: true, ext: hits[0].ext };
+                }
+                if (hits.length > 1) {
+                    return {
+                        ok: false,
+                        ext: "",
+                        ambiguous: true,
+                        countries: hits.map((h) => h.country),
+                    };
+                }
+                return { ok: false, ext: "" };
+            }
+
             function escapeHtml(s) {
                 return String(s == null ? "" : s)
                     .replace(/&/g, "&amp;")
@@ -1201,6 +1300,7 @@
             let currentFields = null;
             let currentFormat = null;
             let currentProvinceCol = null;
+            let currentCountryCol = null;
 
             const dropzone = document.getElementById("dropzone");
             const fileInput = document.getElementById("fileInput");
@@ -1223,9 +1323,11 @@
                 }
                 if (headerScope) {
                     headerScope.textContent =
-                        currentCountry === "CH"
-                            ? "CH · base.state_ch_*"
-                            : "IT · base.state_it_*";
+                        {
+                            AUTO: "Auto · IT · CH",
+                            CH: "CH · base.state_ch_*",
+                            IT: "IT · base.state_it_*",
+                        }[currentCountry] || "IT · base.state_it_*";
                 }
                 // Recompute the current file against the newly selected country.
                 if (currentData) {
@@ -1337,15 +1439,25 @@
 
             function renderWithColumn(provinceCol) {
                 currentProvinceCol = provinceCol;
+                currentCountryCol =
+                    currentCountry === "AUTO"
+                        ? findCountryColumn(
+                              currentFields.filter((f) => f !== provinceCol),
+                          )
+                        : null;
                 const values = currentData.map((r) => r[provinceCol]);
                 const format = detectFormat(values);
 
                 const preview = currentData.slice(0, 6).map((r) => {
                     const orig = r[provinceCol];
-                    const { ok, ext } = toExternalId(orig);
+                    const { ok, ext, ambiguous } = convertRow(r, provinceCol);
                     return {
                         orig: orig == null ? "" : String(orig),
-                        ext: ok ? ext : "— non riconosciuto —",
+                        ext: ok
+                            ? ext
+                            : ambiguous
+                              ? "— ambiguo: indica il Paese —"
+                              : "— non riconosciuto —",
                         ok,
                     };
                 });
@@ -1355,9 +1467,17 @@
                 for (let i = 0; i < currentData.length; i++) {
                     const orig = currentData[i][provinceCol];
                     if (orig == null || !String(orig).trim()) continue;
-                    const { ok } = toExternalId(orig);
+                    const { ok, ambiguous } = convertRow(
+                        currentData[i],
+                        provinceCol,
+                    );
                     if (ok) matched++;
-                    else unmatched.push({ row: i + 2, value: String(orig) });
+                    else
+                        unmatched.push({
+                            row: i + 2,
+                            value: String(orig),
+                            ambiguous,
+                        });
                 }
 
                 const total = currentData.filter(
@@ -1371,6 +1491,19 @@
                     mixed: "Misto",
                     empty: "Vuoto",
                 }[format];
+
+                const countryModeLabel =
+                    currentCountry === "IT"
+                        ? "🇮🇹 Italia"
+                        : currentCountry === "CH"
+                          ? "🇨🇭 Svizzera"
+                          : currentCountryCol
+                            ? `🌍 Auto · colonna «${escapeHtml(currentCountryCol)}»`
+                            : "🌍 Auto · per valore";
+
+                const ambiguousCount = unmatched.filter(
+                    (u) => u.ambiguous,
+                ).length;
 
                 // Build column selector to allow override
                 const colOptions = currentFields
@@ -1395,10 +1528,21 @@
           <div class="value"><span class="badge ${format}">${formatLabel}</span></div>
         </div>
         <div class="field">
+          <label>Paese</label>
+          <div class="value">${countryModeLabel}</div>
+        </div>
+        <div class="field">
           <label>Header di output</label>
           <div class="value">state_id/id</div>
         </div>
       </div>
+      ${
+          currentCountry === "AUTO" && !currentCountryCol
+              ? `<p style="margin:1rem 0 0; color: var(--text-muted); font-size: 0.85rem">
+             Nessuna colonna <code style="font-family:var(--mono)">Country</code>/<code style="font-family:var(--mono)">Paese</code> rilevata: le sigle valide in più Paesi (${escapeHtml("AG, GE, FR, SO, LU…")}) restano ambigue. Aggiungi una colonna Paese per risolverle.
+           </p>`
+              : ""
+      }
     </div>
 
     <div class="card">
@@ -1448,13 +1592,21 @@
           unmatched.length
               ? `
         <div class="warnings">
-          <strong>${unmatched.length} valori non riconosciuti — verranno lasciati vuoti</strong>
+          <strong>${unmatched.length} valori non convertiti — verranno lasciati vuoti${
+              ambiguousCount
+                  ? ` (${ambiguousCount} ambigui: aggiungi una colonna Paese)`
+                  : ""
+          }</strong>
           <ul>
             ${unmatched
                 .slice(0, 30)
                 .map(
                     (u) =>
-                        `<li>riga ${u.row}: <code>${escapeHtml(u.value)}</code></li>`,
+                        `<li>riga ${u.row}: <code>${escapeHtml(u.value)}</code>${
+                            u.ambiguous
+                                ? " — ambiguo tra più Paesi"
+                                : ""
+                        }</li>`,
                 )
                 .join("")}
             ${unmatched.length > 30 ? `<li>… e altri ${unmatched.length - 30}</li>` : ""}
@@ -1487,6 +1639,7 @@
                         currentData = null;
                         currentFields = null;
                         currentProvinceCol = null;
+                        currentCountryCol = null;
                     });
             }
 
@@ -1498,7 +1651,7 @@
                     const out = {};
                     for (const f of currentFields) {
                         if (f === provinceCol) {
-                            const { ext } = toExternalId(row[f]);
+                            const { ext } = convertRow(row, provinceCol);
                             out["state_id/id"] = ext;
                         } else {
                             out[f] = row[f];
