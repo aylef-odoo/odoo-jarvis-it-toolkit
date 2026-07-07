@@ -307,7 +307,7 @@
             <div class="wrap">
                 <a href="./" class="active">Home</a>
                 <a href="IT/e-invoice/generator/">SDI e-invoice XML</a>
-                <a href="IT/state-id-converter/">Province → state_id</a>
+                <a href="IT/state-id-converter/">Province / Cantoni → state_id</a>
                 <a href="IT/domain-filter/">Domain filter</a>
             </div>
         </nav>
@@ -342,17 +342,19 @@
 
                 <a class="card conv" href="IT/state-id-converter/">
                     <div class="icon">🗺️</div>
-                    <h2>Province → state_id converter</h2>
+                    <h2>Province / Cantoni → state_id converter</h2>
                     <p>
                         Upload a CSV or Excel file: the tool detects the
-                        province column (abbreviation or full name) and maps it
-                        to Odoo's native external IDs
-                        (<code>base.state_it_xx</code>).
+                        province (IT) or canton (CH) column — abbreviation or
+                        full name — and maps it to Odoo's native external IDs
+                        (<code>base.state_it_xx</code> /
+                        <code>base.state_ch_xx</code>).
                     </p>
                     <div class="tags">
                         <span class="tag">CSV / XLSX</span>
                         <span class="tag">base.state_it_*</span>
-                        <span class="tag">import</span>
+                        <span class="tag">base.state_ch_*</span>
+                        <span class="tag">🇮🇹 🇨🇭</span>
                     </div>
                     <span class="open">Open tool →</span>
                 </a>
