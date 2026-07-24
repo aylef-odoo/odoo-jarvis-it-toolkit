@@ -1,0 +1,1219 @@
+{
+ "label": "patched",
+ "total_seconds": 9.4,
+ "files": [
+  {
+   "file": "IT01234567890_FPR03.xml",
+   "td": "TD01",
+   "seconds": 0.71,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  CodiceArticolo:  CodiceTipo: INT  CodiceValore: ART123  Descrizione: LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Importo totale dal file XML: 32.5",
+    "DatiOrdineAcquisto dal file XML:    DatiOrdineAcquisto:  RiferimentoNumeroLinea: 1  IdDocumento: 66685  NumItem: 1",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR04.xml",
+   "td": "TD01",
+   "seconds": 0.222,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 3,
+   "taxes": [
+    "22% M",
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  CodiceArticolo:  CodiceTipo: INT  CodiceValore: ART123  Descrizione: LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR05.xml",
+   "td": "TD01",
+   "seconds": 0.192,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 1.00  PrezzoUnitario: 20.00  ScontoMaggiorazione:  Tipo: SC  Percentuale: 100.00  PrezzoTotale: 0.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'LA DESCRIZIONE'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: LA DESCRIZIONE  Quantita: 1.00  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR06.xml",
+   "td": "TD04",
+   "seconds": 0.205,
+   "error": null,
+   "move_type": "in_refund",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "410100"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'SCONTO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: SCONTO  Quantita: 5.00  PrezzoUnitario: -1.00  PrezzoTotale: -5.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR07.xml",
+   "td": "TD04",
+   "seconds": 0.179,
+   "error": null,
+   "move_type": "in_refund",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "410100"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: -2.00  PrezzoTotale: -20.00  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR07_bill.xml",
+   "td": "TD01",
+   "seconds": 0.221,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 3,
+   "taxes": [
+    "0% N2.2 Acquisti",
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'Sedia'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: Sedia  Quantita: 1.00  PrezzoUnitario: 100.00  PrezzoTotale: 100.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'Tavolo'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: Tavolo  Quantita: 1.00  PrezzoUnitario: 900.00  PrezzoTotale: 900.00  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR08.xml",
+   "td": "TD06",
+   "seconds": 0.159,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD06  Divisa: EUR  Data: 2020-01-09  Numero: 124  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 360.00  AliquotaRitenuta: 20.00  CausalePagamento: A  DatiCassaPrevidenziale:  TipoCassa: TC02  AlCassa: 4.00  ImportoContributoCassa: 72.00  ImponibileCassa: 1800.00  AliquotaIVA: 22.00  ImportoTotaleDocumento: 2283.84  Causale: PARCELLA  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: ASSISTENZA TRIBUTARIA  PrezzoUnitario: 1800.00  PrezzoTotale: 1800.00  AliquotaIVA: 22.00  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 1872.00  Imposta: 411.84  EsigibilitaIVA: I",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR09.xml",
+   "td": "TD06",
+   "seconds": 0.161,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S",
+    "RA 23% (Base 20%)"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "ENASARCO tax (type RT02) has wrong reason A    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD06  Divisa: EUR  Data: 2020-05-15  Numero: 125  DatiRitenuta:  TipoRitenuta: RT02  ImportoRitenuta: 30.16  AliquotaRitenuta: 23.00  CausalePagamento: A  ImportoTotaleDocumento: 800.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Compensi provvigionali per procurata vendita  Quantita: 1.000  PrezzoUnitario: 655.74000  PrezzoTotale: 655.74  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 655.74  Imposta: 144.26  EsigibilitaIVA: I",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR10.xml",
+   "td": "TD01",
+   "seconds": 0.204,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  CodiceArticolo:  CodiceTipo: INT  CodiceValore: ART123  Descrizione: LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Conto bancario non trovato, informazioni utili dal file XML:    IBAN: IT59R0100003228000000000621    BIC: BCITITMM    ModalitaPagamento: MP01",
+    "Importo totale dal file XML: 32.5",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR11.xml",
+   "td": "TD01",
+   "seconds": 0.163,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-01-09  Numero: 14401  DatiRitenuta:  TipoRitenuta: RT02  ImportoRitenuta: 52.00  AliquotaRitenuta: 26.00  CausalePagamento: Q  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 40.00  AliquotaRitenuta: 4.00  CausalePagamento: Q  ImportoTotaleDocumento: 1220.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Provvigione  Quantita: 1.000  PrezzoUnitario: 1000.00000  PrezzoTotale: 1000.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 1000.00  Imposta: 220.00  EsigibilitaIVA: I",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-01-09  Numero: 14401  DatiRitenuta:  TipoRitenuta: RT02  ImportoRitenuta: 52.00  AliquotaRitenuta: 26.00  CausalePagamento: Q  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 40.00  AliquotaRitenuta: 4.00  CausalePagamento: Q  ImportoTotaleDocumento: 1220.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Provvigione  Quantita: 1.000  PrezzoUnitario: 1000.00000  PrezzoTotale: 1000.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 1000.00  Imposta: 220.00  EsigibilitaIVA: I",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR12.xml",
+   "td": "TD01",
+   "seconds": 0.167,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-01-09  Numero: 14410  DatiRitenuta:  TipoRitenuta: RT02  ImportoRitenuta: 54.00  AliquotaRitenuta: 27.00  CausalePagamento: Q  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 40.00  AliquotaRitenuta: 4.00  CausalePagamento: Q  ImportoTotaleDocumento: 1220.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Provvigione  Quantita: 1.000  PrezzoUnitario: 1000.00000  PrezzoTotale: 1000.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 1000.00  Imposta: 220.00  EsigibilitaIVA: I",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-01-09  Numero: 14410  DatiRitenuta:  TipoRitenuta: RT02  ImportoRitenuta: 54.00  AliquotaRitenuta: 27.00  CausalePagamento: Q  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 40.00  AliquotaRitenuta: 4.00  CausalePagamento: Q  ImportoTotaleDocumento: 1220.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Provvigione  Quantita: 1.000  PrezzoUnitario: 1000.00000  PrezzoTotale: 1000.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 1000.00  Imposta: 220.00  EsigibilitaIVA: I",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR13.xml",
+   "td": "TD01",
+   "seconds": 0.176,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "20% RIT PF",
+    "22% M",
+    "4% INPS"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'Consulenza attività commerciale e gestione progetti svolta nel periodo 08/2019-08/2020'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: Consulenza attività commerciale e gestione progetti svolta nel periodo 08/2019-08/2020  Quantita: 1.00  PrezzoUnitario: 15000.00  PrezzoTotale: 15000.00  AliquotaIVA: 22.00  Ritenuta: SI",
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: FINECO BANK    IBAN: IT37F0301503200000005796587    BIC: UNCRITMMXXX    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 15912.0",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR14.xml",
+   "td": "TD01",
+   "seconds": 0.198,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 54313.5",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR15.xml",
+   "td": "TD01",
+   "seconds": 0.197,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Conto bancario non trovato, informazioni utili dal file XML:    IBAN: IT59R0100003228000000000622    BIC: BCITITMM    ModalitaPagamento: MP01",
+    "Importo totale dal file XML: 54313.5",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR16.xml",
+   "td": "TD01",
+   "seconds": 0.17,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'Test precisione decimale'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: Test precisione decimale  Quantita: 69.00  PrezzoUnitario: 0.968  PrezzoTotale: 66.792  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_x05mX.xml",
+   "td": "TD17",
+   "seconds": 0.175,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "ALPHA SOCIETY",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "DatiFattureCollegate dal file XML:    DatiFattureCollegate:  IdDocumento: BEP/2022/0009  Data: 2022-07-21",
+    "DatiFattureCollegate dal file XML:    DatiFattureCollegate:  IdDocumento: BEP/2022/0009  Data: 2022-06-30",
+    "DatiFattureCollegate dal file XML:    DatiFattureCollegate:  IdDocumento: BEP/2022/0009  Data: 2022-07-21",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02098391200_FPR16.xml",
+   "td": "TD01",
+   "seconds": 0.176,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'Quota fissa Fognatura'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 10  Descrizione: Quota fissa Fognatura  Quantita: 10.00  DataInizioPeriodo: 2022-01-01  DataFinePeriodo: 2022-04-19  PrezzoUnitario: -0.15  PrezzoTotale: -1.50  AliquotaIVA: 22.00",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11004.xml",
+   "td": "TD01",
+   "seconds": 0.245,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M",
+    "4% F.Pens."
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione: LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: Bank Test    IstitutoFinanziario: Bank Test    IstitutoFinanziario: Bank Test    IBAN: IT28V0100003245232200001200    IBAN: IT28V0100003245232200001200    IBAN: IT28V0100003245232200001200    BIC: GEBABEBB    BIC: GEBABEBB    BIC: GEBABEBB    ModalitaPagamento: MP05    ModalitaPagamento: MP05    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 30.5",
+    "DatiRicezione dal file XML:    DatiRicezione:  RiferimentoNumeroLinea: 1  IdDocumento: 123  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiConvenzione dal file XML:    DatiConvenzione:  RiferimentoNumeroLinea: 1  IdDocumento: 123  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiContratto dal file XML:    DatiContratto:  RiferimentoNumeroLinea: 1  IdDocumento: 123  Data: 2012-09-01  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiOrdineAcquisto dal file XML:    DatiOrdineAcquisto:  RiferimentoNumeroLinea: 1  IdDocumento: 66685  NumItem: 1  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "Allegato da XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11004_bank.xml",
+   "td": "TD01",
+   "seconds": 0.027,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11004_xml_doctor.xml",
+   "td": "TD01",
+   "seconds": 0.235,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M",
+    "4% F.Pens."
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description ''. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  Descrizione:  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: Bank Test    IstitutoFinanziario: Bank Test    IstitutoFinanziario: Bank Test    IBAN: IT28V0100003245232200001200    IBAN: IT28V0100003245232200001200    IBAN: IT28V0100003245232200001200    BIC: GEBABEBB    BIC: GEBABEBB    BIC: GEBABEBB    ModalitaPagamento: MP05    ModalitaPagamento: MP05    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 30.5",
+    "DatiRicezione dal file XML:    DatiRicezione:  RiferimentoNumeroLinea: 1  IdDocumento: 123  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiConvenzione dal file XML:    DatiConvenzione:  RiferimentoNumeroLinea: 1  IdDocumento: 123  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiContratto dal file XML:    DatiContratto:  RiferimentoNumeroLinea: 1  IdDocumento: 123  Data: 2012-09-01  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiOrdineAcquisto dal file XML:    DatiOrdineAcquisto:  RiferimentoNumeroLinea: 1  IdDocumento: 66685  NumItem: 1  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11005.xml",
+   "td": "TD01",
+   "seconds": 0.225,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M",
+    "4% F.Pens."
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description 'LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  CodiceArticolo:  CodiceTipo: EAN  CodiceValore: 12345  Descrizione: LA DESCRIZIONE DELLA FORNITURA PUO' SUPERARE I CENTO CARATTERI CHE RAPPRESENTAVANO IL PRECEDENTE LIMITE DIMENSIONALE. TALE LIMITE NELLA NUOVA VERSIONE E' STATO PORTATO A MILLE CARATTERI  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: Bank Test    IstitutoFinanziario: Bank Test    IstitutoFinanziario: Bank Test    IBAN: IT28V0100003245232200001200    IBAN: IT28V0100003245232200001200    IBAN: IT28V0100003245232200001200    BIC: GEBABEBB    BIC: GEBABEBB    BIC: GEBABEBB    ModalitaPagamento: MP05    ModalitaPagamento: MP05    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 30.5",
+    "DatiRicezione dal file XML:    DatiRicezione:  RiferimentoNumeroLinea: 1  IdDocumento: 123  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiConvenzione dal file XML:    DatiConvenzione:  RiferimentoNumeroLinea: 1  IdDocumento: 123  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiContratto dal file XML:    DatiContratto:  RiferimentoNumeroLinea: 1  IdDocumento: 123  Data: 2012-09-01  NumItem: 5  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "DatiOrdineAcquisto dal file XML:    DatiOrdineAcquisto:  RiferimentoNumeroLinea: 1  IdDocumento: 66685  NumItem: 1  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "Allegato da XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11006.xml",
+   "td": "TD01",
+   "seconds": 0.188,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% M"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "5 taxes match the 22.0% rate for line with description 'FORNITURE VARIE PER UFFICIO'. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 22.00",
+    "5 taxes match the 22.0% rate for line with description ''. '22% M' has been selected, please verify it.    DettaglioLinee:  NumeroLinea: 1  CodiceArticolo:  CodiceTipo: EAN  CodiceValore: 12345  Descrizione:  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 22.00",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "DatiOrdineAcquisto dal file XML:    DatiOrdineAcquisto:  RiferimentoNumeroLinea: 60  IdDocumento: 66685  NumItem: 1  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11007.xml",
+   "td": "TD01",
+   "seconds": 0.17,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Imposta non trovata per la riga con descrizione 'FORNITURE VARIE PER UFFICIO'    DettaglioLinee:  NumeroLinea: 2  Descrizione: FORNITURE VARIE PER UFFICIO  Quantita: 10.00  PrezzoUnitario: 2.00  PrezzoTotale: 20.00  AliquotaIVA: 15.55",
+    "Imposta non trovata per la riga con descrizione 'ABC'    DettaglioLinee:  NumeroLinea: 1  CodiceArticolo:  CodiceTipo: EAN  CodiceValore: 12345  Descrizione: ABC  Quantita: 5.00  PrezzoUnitario: 1.00  PrezzoTotale: 5.00  AliquotaIVA: 15.55",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "DatiOrdineAcquisto dal file XML:    DatiOrdineAcquisto:  RiferimentoNumeroLinea: 60  IdDocumento: 66685  NumItem: 1  CodiceCUP: 123abc  CodiceCIG: 456def",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11008.xml",
+   "td": "TD17",
+   "seconds": 0.148,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "Test Company GmbH",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT02780790107_11009.xml",
+   "td": "TD07",
+   "seconds": 0.134,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_001.xml",
+   "td": "TD01",
+   "seconds": 0.144,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 54.0",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2015-02-16  Numero: FT/2015/0006  DatiCassaPrevidenziale:  TipoCassa: TC22  AlCassa: 0.00  ImportoContributoCassa: 3.00  ImponibileCassa: 3.00  AliquotaIVA: 0.00  Natura: N4  Causale: Rif ordine MAPA: --- Nr. Identificativo Ordine 1234567  DatiTrasporto:  PesoLordo: 0.00  PesoNetto: 0.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Prodotto di test al giorno  Quantita: 15.00  UnitaMisura: Giorno(i)  PrezzoUnitario: 3.60  PrezzoTotale: 54.00  AliquotaIVA: 0.00  Natura: N4  AltriDatiGestionali:  TipoDato: Vostro RIF  RiferimentoTesto: Riferimento  RiferimentoNumero: 3.00  AltriDatiGestionali:  TipoDato: Vostro RIF  RiferimentoTesto: Riferimento2  DatiRiepilogo:  AliquotaIVA: 0.00  Natura: N4  ImponibileImporto: 57.00  Imposta: 0.00  RiferimentoNormativo: Operazioni senza addebito imposta regime contribuenti minimi art.27 c.1-2 DL.98/11  DatiPagamento:  CondizioniPagamento: TP01  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-03-18  ImportoPagamento: 27.00  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-04-17  ImportoPagamento: 27.00",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_002.xml",
+   "td": "TD01",
+   "seconds": 0.143,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 54.0",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2015-02-16  Numero: FT/2015/0007  DatiCassaPrevidenziale:  TipoCassa: TC22  AlCassa: 0.00  ImportoContributoCassa: 3.00  ImponibileCassa: 3.00  AliquotaIVA: 0.00  Natura: N4  Causale: Rif ordine MAPA: --- Nr. Identificativo Ordine 1234567  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Prodotto di test al giorno  Quantita: 15.00  UnitaMisura: Giorno(i)  PrezzoUnitario: 3.60  PrezzoTotale: 54.00  AliquotaIVA: 0.00  Natura: N4  DatiRiepilogo:  AliquotaIVA: 0.00  Natura: N4  ImponibileImporto: 57.00  Imposta: 0.00  RiferimentoNormativo: Operazioni senza addebito imposta regime contribuenti minimi art.27 c.1-2 DL.98/11  DatiPagamento:  CondizioniPagamento: TP01  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-03-18  ImportoPagamento: 27.00  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-04-17  ImportoPagamento: 27.00",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_003.xml",
+   "td": "TD01",
+   "seconds": 0.135,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_004.xml",
+   "td": "TD01",
+   "seconds": 0.214,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_005.xml",
+   "td": "TD01",
+   "seconds": 0.167,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_007.xml",
+   "td": "TD01",
+   "seconds": 0.128,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: Bank Test    IBAN: IT24J0617501400000006042218    BIC: GEBABEBB    ModalitaPagamento: MP18",
+    "Importo totale dal file XML: 9.0",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_008.xml",
+   "td": "TD01",
+   "seconds": 0.16,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_009.xml",
+   "td": "TD01",
+   "seconds": 0.169,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "20% RIT PF",
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 5.1",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_010.xml",
+   "td": "TD01",
+   "seconds": 0.161,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "20% RIT PF",
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 5.1",
+    "DatiFattureCollegate dal file XML:    DatiFattureCollegate:  RiferimentoNumeroLinea: 1  IdDocumento: 1/PF  Data: 2014-12-18  NumItem: 1",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_011.xml",
+   "td": "TD01",
+   "seconds": 0.137,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 54.0",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2015-02-16  Numero: 14021  DatiCassaPrevidenziale:  TipoCassa: TC22  AlCassa: 0.00  ImportoContributoCassa: 3.00  ImponibileCassa: 3.00  AliquotaIVA: 0.00  Natura: N4  Causale: Rif ordine MAPA: --- Nr. Identificativo Ordine 1234567  DatiTrasporto:  PesoLordo: 0.00  PesoNetto: 0.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Prodotto di test al giorno  Quantita: 15.00  UnitaMisura: Giorno(i)  PrezzoUnitario: 3.60  PrezzoTotale: 54.00  AliquotaIVA: 0.00  Natura: N4  AltriDatiGestionali:  TipoDato: Vostro RIF  RiferimentoTesto: Riferimento  RiferimentoNumero: 3.00  AltriDatiGestionali:  TipoDato: Vostro RIF  RiferimentoTesto: Riferimento2  DatiRiepilogo:  AliquotaIVA: 0.00  Natura: N4  ImponibileImporto: 57.00  Imposta: 0.00  RiferimentoNormativo: Operazioni senza addebito imposta regime contribuenti minimi art.27 c.1-2 DL.98/11  DatiPagamento:  CondizioniPagamento: TP01  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-03-18  ImportoPagamento: 27.00  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-04-17  ImportoPagamento: 27.00",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_012.xml",
+   "td": "TD01",
+   "seconds": 0.148,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_013.xml",
+   "td": "TD01",
+   "seconds": 0.149,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_014.xml",
+   "td": "TD01",
+   "seconds": 0.16,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 2690.57",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2019-07-02  Numero: FPR 16/19  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 284.05  AliquotaRitenuta: 11.50  CausalePagamento: A  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 1.57  ImportoContributoCassa: 38.78  ImponibileCassa: 2470.00  AliquotaIVA: 0.00  Natura: N2  ImportoTotaleDocumento: 3013.40  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: ACCONTO PROVVIGIONI  Quantita: 1.00  PrezzoUnitario: 2470.00  PrezzoTotale: 2470.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 2470.00  Imposta: 543.40  DatiRiepilogo:  AliquotaIVA: 0.00  Natura: N2  ImponibileImporto: 38.78  Imposta: 0.00  RiferimentoNormativo: Escluso Art. 13 5C DPR 633/72  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2019-07-02  ImportoPagamento: 2690.57",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2019-07-02  Numero: FPR 16/19  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 284.05  AliquotaRitenuta: 11.50  CausalePagamento: A  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 1.57  ImportoContributoCassa: 38.78  ImponibileCassa: 2470.00  AliquotaIVA: 0.00  Natura: N2  ImportoTotaleDocumento: 3013.40  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: ACCONTO PROVVIGIONI  Quantita: 1.00  PrezzoUnitario: 2470.00  PrezzoTotale: 2470.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 2470.00  Imposta: 543.40  DatiRiepilogo:  AliquotaIVA: 0.00  Natura: N2  ImponibileImporto: 38.78  Imposta: 0.00  RiferimentoNormativo: Escluso Art. 13 5C DPR 633/72  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2019-07-02  ImportoPagamento: 2690.57",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_015.xml",
+   "td": "TD01",
+   "seconds": 0.176,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_016.xml",
+   "td": "TD01",
+   "seconds": 0.208,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_017.xml",
+   "td": "TD01",
+   "seconds": 0.152,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 54.0",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2015-02-16  Numero: FT/2015/0006  DatiCassaPrevidenziale:  TipoCassa: TC22  AlCassa: 0.00  ImportoContributoCassa: 3.00  ImponibileCassa: 3.00  AliquotaIVA: 0.00  Natura: N4  Causale: Rif ordine MAPA: --- Nr. Identificativo Ordine 1234567  DatiTrasporto:  PesoLordo: 0.00  PesoNetto: 0.00  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: Prodotto di test al giorno  Quantita: 15.00  UnitaMisura: Giorno(i)  PrezzoUnitario: 3.60  PrezzoTotale: 54.00  AliquotaIVA: 0.00  Natura: N4  AltriDatiGestionali:  TipoDato: Vostro RIF  RiferimentoTesto: Riferimento  RiferimentoNumero: 3.00  AltriDatiGestionali:  TipoDato: Vostro RIF  RiferimentoTesto: Riferimento2  DatiRiepilogo:  AliquotaIVA: 0.00  Natura: N4  ImponibileImporto: 57.00  Imposta: 0.00  RiferimentoNormativo: Operazioni senza addebito imposta regime contribuenti minimi art.27 c.1-2 DL.98/11  DatiPagamento:  CondizioniPagamento: TP01  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-03-18  ImportoPagamento: 27.00  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2015-04-17  ImportoPagamento: 27.00",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_no_decl.xml",
+   "td": "TD01",
+   "seconds": 0.037,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_q0.xml",
+   "td": "TD01",
+   "seconds": 0.181,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "0% N4 Acquisti esenti"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_ripilogoiva.xml",
+   "td": "TD01",
+   "seconds": 0.023,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT08973230967_6zZcm.xml",
+   "td": "TD01",
+   "seconds": 0.204,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "GAV spa",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Importo totale dal file XML: 28.4",
+    "Data scadenza pagamento non valida nel file XML: False",
+    "DatiContratto dal file XML:    DatiContratto:  RiferimentoNumeroLinea: 1  RiferimentoNumeroLinea: 2  IdDocumento: 406-1634151-9421169  Data: 2023-08-06",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "ITBNCMRA80A01D548T_20001.xml",
+   "td": "TD01",
+   "seconds": 0.202,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "Bianchi Mario",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "20% RIT PF",
+    "22% S",
+    "4% F.Pens."
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: FINECO BANK    IBAN: IT37F0301503200000005796511    BIC: UNCRITMMXXX    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 122.91",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "ITBNCMRA80A01D548T_20005.xml",
+   "td": "TD01",
+   "seconds": 0.19,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "Bianchi Mario",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "20% RIT PF",
+    "22% S",
+    "4% F.Pens."
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: FINECO BANK    IBAN: IT37F0301503200000005796511    BIC: UNCRITMMXXX    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 122.91",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "ITNREGCM80H30D612D_20003.xml",
+   "td": "TD01",
+   "seconds": 0.213,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "NERI GIACOMO",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S",
+    "ENASARCO"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: FINECO BANK    IBAN: IT37F0301503200000005796533    BIC: UNCRITMMXXX    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 10.2",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-10-25  Numero: 003  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 1.15  AliquotaRitenuta: 11.50  CausalePagamento: R  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 0.85  AliquotaRitenuta: 8.50  CausalePagamento: R  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 8.50  ImportoContributoCassa: 0.85  ImponibileCassa: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  ImportoTotaleDocumento: 10.20  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: PROVVIGIONI  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 10.00  Imposta: 2.20  EsigibilitaIVA: I  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2020-09-30  ImportoPagamento: 10.20  IstitutoFinanziario: FINECO BANK  IBAN: IT37F0301503200000005796533  BIC: UNCRITMMXXX",
+    "ENASARCO tax (type RT04) has wrong reason R    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-10-25  Numero: 003  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 1.15  AliquotaRitenuta: 11.50  CausalePagamento: R  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 0.85  AliquotaRitenuta: 8.50  CausalePagamento: R  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 8.50  ImportoContributoCassa: 0.85  ImponibileCassa: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  ImportoTotaleDocumento: 10.20  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: PROVVIGIONI  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 10.00  Imposta: 2.20  EsigibilitaIVA: I  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2020-09-30  ImportoPagamento: 10.20  IstitutoFinanziario: FINECO BANK  IBAN: IT37F0301503200000005796533  BIC: UNCRITMMXXX",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-10-25  Numero: 003  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 1.15  AliquotaRitenuta: 11.50  CausalePagamento: R  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 0.85  AliquotaRitenuta: 8.50  CausalePagamento: R  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 8.50  ImportoContributoCassa: 0.85  ImponibileCassa: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  ImportoTotaleDocumento: 10.20  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: PROVVIGIONI  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 10.00  Imposta: 2.20  EsigibilitaIVA: I  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2020-09-30  ImportoPagamento: 10.20  IstitutoFinanziario: FINECO BANK  IBAN: IT37F0301503200000005796533  BIC: UNCRITMMXXX",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "ITNREGCM80H30D612D_20004.xml",
+   "td": "TD01",
+   "seconds": 0.207,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "NERI GIACOMO",
+   "partner_found": true,
+   "n_lines": 1,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Conto bancario non trovato, informazioni utili dal file XML:    IstitutoFinanziario: FINECO BANK    IBAN: IT37F0301503200000005796533    BIC: UNCRITMMXXX    ModalitaPagamento: MP05",
+    "Importo totale dal file XML: 10.2",
+    "Imposta Fondo Pensione non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-10-25  Numero: 14031  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 1.15  AliquotaRitenuta: 11.50  CausalePagamento: R  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 0.85  AliquotaRitenuta: 8.50  CausalePagamento: R  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 8.50  ImportoContributoCassa: 0.85  ImponibileCassa: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  ImportoTotaleDocumento: 10.20  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: PROVVIGIONI  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 10.00  Imposta: 2.20  EsigibilitaIVA: I  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2020-09-30  ImportoPagamento: 10.20  IstitutoFinanziario: FINECO BANK  IBAN: IT37F0301503200000005796533  BIC: UNCRITMMXXX",
+    "ENASARCO tax (type RT04) has wrong reason R    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-10-25  Numero: 14031  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 1.15  AliquotaRitenuta: 11.50  CausalePagamento: R  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 0.85  AliquotaRitenuta: 8.50  CausalePagamento: R  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 8.50  ImportoContributoCassa: 0.85  ImponibileCassa: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  ImportoTotaleDocumento: 10.20  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: PROVVIGIONI  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 10.00  Imposta: 2.20  EsigibilitaIVA: I  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2020-09-30  ImportoPagamento: 10.20  IstitutoFinanziario: FINECO BANK  IBAN: IT37F0301503200000005796533  BIC: UNCRITMMXXX",
+    "Ritenuta d'acconto non trovata    FatturaElettronicaBody:  DatiGenerali:  DatiGeneraliDocumento:  TipoDocumento: TD01  Divisa: EUR  Data: 2020-10-25  Numero: 14031  DatiRitenuta:  TipoRitenuta: RT01  ImportoRitenuta: 1.15  AliquotaRitenuta: 11.50  CausalePagamento: R  DatiRitenuta:  TipoRitenuta: RT04  ImportoRitenuta: 0.85  AliquotaRitenuta: 8.50  CausalePagamento: R  DatiCassaPrevidenziale:  TipoCassa: TC07  AlCassa: 8.50  ImportoContributoCassa: 0.85  ImponibileCassa: 10.00  AliquotaIVA: 22.00  Ritenuta: SI  ImportoTotaleDocumento: 10.20  DatiBeniServizi:  DettaglioLinee:  NumeroLinea: 1  Descrizione: PROVVIGIONI  PrezzoUnitario: 10.00  PrezzoTotale: 10.00  AliquotaIVA: 22.00  DatiRiepilogo:  AliquotaIVA: 22.00  ImponibileImporto: 10.00  Imposta: 2.20  EsigibilitaIVA: I  DatiPagamento:  CondizioniPagamento: TP02  DettaglioPagamento:  ModalitaPagamento: MP05  DataScadenzaPagamento: 2020-09-30  ImportoPagamento: 10.20  IstitutoFinanziario: FINECO BANK  IBAN: IT37F0301503200000005796533  BIC: UNCRITMMXXX",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "ZGEXQROO37831_anonimizzata.xml",
+   "td": "TD01",
+   "seconds": 0.021,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_006.XML",
+   "td": "TD01",
+   "seconds": 0.197,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": "SOCIETA' ALPHA BETA SRL",
+   "partner_found": true,
+   "n_lines": 2,
+   "taxes": [
+    "22% S"
+   ],
+   "accounts": [
+    "210300"
+   ],
+   "chatter": [
+    "Data scadenza pagamento non valida nel file XML: False",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR03.base64.xml.p7m",
+   "td": "p7m",
+   "seconds": 0.025,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR03.xml.p7m",
+   "td": "p7m",
+   "seconds": 0.083,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "La Partita IVA e il Codice Fiscale della tua azienda non sono stati trovati nelle sezioni acquirente e/o venditore all'interno del documento.",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT01234567890_FPR04.base64.xml.p7m",
+   "td": "p7m",
+   "seconds": 0.025,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  },
+  {
+   "file": "IT05979361218_fake.xml.p7m",
+   "td": "p7m",
+   "seconds": 0.022,
+   "error": null,
+   "move_type": "in_invoice",
+   "partner": null,
+   "partner_found": false,
+   "n_lines": 0,
+   "taxes": [],
+   "accounts": [],
+   "chatter": [
+    "There was an error while importing the bill, you can find attached the incoming XML",
+    "Questo documento è stato creato a partire dai seguenti allegati.",
+    "Fattura fornitore creata"
+   ]
+  }
+ ]
+}
