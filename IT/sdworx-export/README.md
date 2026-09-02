@@ -34,7 +34,7 @@ Field origins (same mapping as the Odoo module):
 | XML | Source |
 |-----|--------|
 | `CodAziendaUfficiale` | company `external_code` (entered once in the tool) |
-| `CodDipendenteUfficiale` | employee `external_code` (mapped per employee) |
+| `CodDipendenteUfficiale` | employee `external_code` (mapped per employee), zero-padded to 7 digits |
 | `CodGiustificativoRilPres` / `Ufficiale` | `work_entry_type.external_code` (mapped per leave type) |
 | `Data` | leave day, `YYYY-MM-DD` |
 | `NumOre` / `NumMinuti` | duration split into whole hours / remainder minutes |

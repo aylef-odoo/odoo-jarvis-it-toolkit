@@ -267,7 +267,8 @@
         <input type="text" id="empSearch" placeholder="Cerca dipendente…" />
         <span class="tag count" id="empProgress"></span>
       </div>
-      <div class="tbl-wrap scroll-y" id="empTblWrap"><table id="empTbl"><thead><tr><th>Dipendente</th><th>Login</th><th style="text-align:right">Righe</th><th>Codice SD Worx</th></tr></thead><tbody></tbody></table></div>
+      <p class="muted-note">Nell'XML la matricola viene riempita di zeri fino a <b>7 cifre</b> (es. <code class="k">12</code> &rarr; <code class="k">0000012</code>): puoi inserire qui il codice senza zeri iniziali.</p>
+      <div class="tbl-wrap scroll-y" id="empTblWrap"><table id="empTbl"><thead><tr><th>Dipendente</th><th>Login</th><th style="text-align:right">Righe</th><th>Matricola</th></tr></thead><tbody></tbody></table></div>
     </div>
   </section>
 
@@ -615,6 +616,9 @@ function expand(row,hpd,skipWknd){
 function hm(hours){let h=Math.floor(hours+1e-9);let m=Math.round((hours-h)*60);if(m===60){h++;m=0;}return[h,m];}
 
 /* ---------- build XML ---------- */
+/* SD Worx wants the matricola zero-padded to 7 digits (es. 12 -> 0000012) */
+const EMP_CODE_LEN=7;
+function empCodeXml(code){const c=String(code).trim();return c?c.padStart(EMP_CODE_LEN,"0"):c;}
 function buildXml(){
   const hpd=parseFloat($("#hpd").value)||8;
   const skip=$("#skipWknd").checked;
@@ -642,7 +646,7 @@ function buildXml(){
   for(const arr of byEmp.values())arr.sort((a,b)=>a.date.localeCompare(b.date));
   let xml='<?xml version="1.0" encoding="utf-8"?>\n<Fornitura>\n';
   for(const[ec,movs]of[...byEmp.entries()].sort((a,b)=>a[0].localeCompare(b[0]))){
-    xml+=`  <Dipendente CodAziendaUfficiale="${esc(coAz)}" CodDipendenteUfficiale="${esc(ec)}">\n`;
+    xml+=`  <Dipendente CodAziendaUfficiale="${esc(coAz)}" CodDipendenteUfficiale="${esc(empCodeXml(ec))}">\n`;
     xml+=`    <Movimenti GenerazioneAutomaticaDaTeorico="N">\n`;
     for(const m of movs){
       xml+=`      <Movimento>\n`;
