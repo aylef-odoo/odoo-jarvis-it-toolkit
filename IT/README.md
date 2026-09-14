@@ -10,7 +10,7 @@ Sample data and tooling to test the Italian Odoo localization (`l10n_it`) end-to
 
 ## 📂 Sections
 
-> 🌐 **Live tools (no install):** [SDI e-invoice XML generator](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/e-invoice/generator/) · [Province → `state_id` converter](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/state-id-converter/) · [Domain filter builder](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/domain-filter/) — or browse from the [toolkit home](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/).
+> 🌐 **Live tools (no install):** [SDI e-invoice XML generator](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/e-invoice/generator/) · [Province → `state_id` converter](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/state-id-converter/) · [Domain filter builder](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/domain-filter/) · [Domain builder (pre-v20)](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/IT/custom-filter-pre20/) — or browse from the [toolkit home](https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/).
 
 | Folder | What's inside | When to use it |
 |--------|---------------|----------------|
@@ -19,6 +19,7 @@ Sample data and tooling to test the Italian Odoo localization (`l10n_it`) end-to
 | [`cbi/`](./cbi/) | CBI / SEPA payment batch XML examples | Inspect or test the payment-batch format Odoo generates for Italian banks. |
 | [`state-id-converter/`](./state-id-converter/) | Browser tool that maps Italian provinces to `base.state_it_*` external IDs | Prepare a CSV/Excel for import so `state_id` resolves correctly in Odoo. |
 | [`domain-filter/`](./domain-filter/) | Browser tool that builds an Odoo domain filter from a list of values | Generate a `["|", ...]` domain (ilike/in/=) to paste into a filter, server action, or `search`. |
+| [`custom-filter-pre20/`](./custom-filter-pre20/) | Browser tool to visually build nested Odoo domains (pre-v20 syntax) | Build complex domains with AND/OR groups and prefix operators (`&`, `|`). |
 
 Open each folder's `README.md` for step-by-step instructions.
 
@@ -32,7 +33,8 @@ IT/
 │   └── generator/
 ├── cbi/                 # CBI payment batch XML examples
 ├── state-id-converter/  # Browser tool: province → base.state_it_* external ID
-└── domain-filter/       # Browser tool: list of values → Odoo domain filter
+├── domain-filter/       # Browser tool: list of values → Odoo domain filter
+└── custom-filter-pre20/ # Browser tool: visual nested domain builder (pre-v20)
 ```
 
 > ℹ️ An additional admin-only tool (`sdworx-export/`, Ferie `hr.leave` → SD Worx movements XML) is intentionally **not listed** on the toolkit home menu and is reachable only via its direct link.
