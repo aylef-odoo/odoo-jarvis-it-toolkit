@@ -1,0 +1,59 @@
+name: Notify Discord on Pages deploy
+
+# PARKED / not yet active. To go live:
+#   1. Get "Manage Webhooks" rights (ask a Discord admin).
+#   2. Create an Incoming Webhook on the target channel
+#      (channel ID 1151452420593946664) and copy its URL.
+#   3. Add repo secret DISCORD_WEBHOOK with that URL.
+#   4. Commit & push this file to main.
+# Until the secret exists the job below skips silently, so committing it
+# early is harmless — it just won't post anything.
+#
+# Fires after GitHub's built-in (legacy) Pages build finishes for the
+# published branch. We only announce successful deploys
+# (github.event.build.status == "built").
+on: page_build
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      GH_TOKEN: ${{ github.token }}
+      SITE_URL: https://aylef-odoo.github.io/odoo-jarvis-it-toolkit/
+    steps:
+      - name: Notify success
+        # env.DISCORD_WEBHOOK guard: skip quietly until the secret is set,
+        # so a missing secret never turns into a failed run.
+        if: ${{ github.event.build.status == 'built' && env.DISCORD_WEBHOOK != '' }}
+        run: |
+          set -euo pipefail
+          SHA='${{ github.event.build.commit }}'
+          PUSHER='${{ github.event.build.pusher.login }}'
+          MSG="$(gh api "repos/${{ github.repository }}/commits/${SHA}" --jq '.commit.message')"
+          payload="$(jq -n \
+            --arg site "$SITE_URL" \
+            --arg repo '${{ github.repository }}' \
+            --arg sha "${SHA:0:7}" \
+            --arg pusher "$PUSHER" \
+            --arg msg "$MSG" \
+            '{
+              username: "GitHub Pages",
+              embeds: [{
+                title: "🚀 New version deployed",
+                url: $site,
+                color: 3066993,
+                description: $msg,
+                fields: [
+                  { name: "Repo",   value: $repo,   inline: true },
+                  { name: "Commit", value: $sha,    inline: true },
+                  { name: "By",     value: $pusher, inline: true }
+                ],
+                footer: { text: "GitHub Pages deploy" }
+              }]
+            }')"
+          curl -sf -X POST -H "Content-Type: application/json" \
+            -d "$payload" "$DISCORD_WEBHOOK"
