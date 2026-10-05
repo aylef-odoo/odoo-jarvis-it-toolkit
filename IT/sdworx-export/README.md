@@ -33,8 +33,8 @@ Field origins (same mapping as the Odoo module):
 
 | XML | Source |
 |-----|--------|
-| `CodAziendaUfficiale` | company `external_code` (entered once in the tool) |
-| `CodDipendenteUfficiale` | employee `external_code` (mapped per employee), zero-padded to 7 digits |
+| `CodAziendaUfficiale` | company code (entered once in the tool), zero-padded to 6 digits (`9` → `000009`) |
+| `CodDipendenteUfficiale` | employee code (mapped per employee), with a selectable format: no leading zeros (`10`), 6 digits (`000010`), or 7 digits (`0000010`) |
 | `CodGiustificativoRilPres` / `Ufficiale` | `work_entry_type.external_code` (mapped per leave type) |
 | `Data` | leave day, `YYYY-MM-DD` |
 | `NumOre` / `NumMinuti` | duration split into whole hours / remainder minutes |
@@ -44,7 +44,7 @@ Field origins (same mapping as the Odoo module):
 1. In Odoo, export the *Time Off* list (`hr.leave`) with the columns above to CSV or XLSX.
 2. Open [`index.html`](./index.html) in any modern browser (double-click, or use the live link below).
 3. Paste the Zucchetti **`Ele DIP`** roster export into the big text box in *Mappa i dipendenti* and press **Abbina automaticamente**: employee codes are matched by name (accent/order insensitive) and the **company code** is filled in automatically. Fill any leftover employee or justification code by hand (red = missing).
-4. Set **hours/day** and, if needed, the reference **period**, then press **Genera XML**, review the summary and warnings, and **Scarica .xml**.
+4. Select the employee code format required by the importer (the default is 7 digits, matching the sample above). Set **hours/day** and, if needed, the reference **period**, then press **Genera XML**, review the summary and warnings, and **Scarica .xml**.
 
 ### Employee name matching
 

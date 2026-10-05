@@ -217,7 +217,16 @@
         <div class="field">
           <label for="coAz">Codice azienda SD Worx</label>
           <input type="text" class="code" id="coAz" placeholder="es. 000009" />
-          <span class="desc">Attributo <code class="k">CodAziendaUfficiale</code></span>
+          <span class="desc">Attributo <code class="k">CodAziendaUfficiale</code>: nell'XML è portato a 6 cifre (es. 9 → 000009)</span>
+        </div>
+        <div class="field">
+          <label for="empFormat">Formato matricola nell'XML</label>
+          <select id="empFormat">
+            <option value="plain">Senza zeri iniziali (10)</option>
+            <option value="6">6 cifre (000010)</option>
+            <option value="7" selected>7 cifre (0000010)</option>
+          </select>
+          <span class="desc">Scegli il formato richiesto dal sistema che importa il file</span>
         </div>
         <div class="field">
           <label for="hpd">Ore per giornata intera</label>
@@ -267,7 +276,7 @@
         <input type="text" id="empSearch" placeholder="Cerca dipendente…" />
         <span class="tag count" id="empProgress"></span>
       </div>
-      <p class="muted-note">Nell'XML la matricola viene riempita di zeri fino a <b>7 cifre</b> (es. <code class="k">12</code> &rarr; <code class="k">0000012</code>): puoi inserire qui il codice senza zeri iniziali.</p>
+      <p class="muted-note">Puoi incollare la matricola anche con gli zeri dell'anagrafica: nell'XML sarà convertita secondo il <b>formato scelto nelle impostazioni</b>.</p>
       <div class="tbl-wrap scroll-y" id="empTblWrap"><table id="empTbl"><thead><tr><th>Dipendente</th><th>Login</th><th style="text-align:right">Righe</th><th>Matricola</th></tr></thead><tbody></tbody></table></div>
     </div>
   </section>
@@ -616,13 +625,18 @@ function expand(row,hpd,skipWknd){
 function hm(hours){let h=Math.floor(hours+1e-9);let m=Math.round((hours-h)*60);if(m===60){h++;m=0;}return[h,m];}
 
 /* ---------- build XML ---------- */
-/* SD Worx wants the matricola zero-padded to 7 digits (es. 12 -> 0000012) */
-const EMP_CODE_LEN=7;
-function empCodeXml(code){const c=String(code).trim();return c?c.padStart(EMP_CODE_LEN,"0"):c;}
+function companyCodeXml(code){const c=String(code).trim();return /^\d+$/.test(c)?c.padStart(6,"0"):c;}
+function empCodeXml(code,format){
+  const c=String(code).trim();
+  if(!/^\d+$/.test(c))return c;
+  const number=c.replace(/^0+(?=\d)/,"");
+  return format==="plain"?number:number.padStart(Number(format),"0");
+}
 function buildXml(){
   const hpd=parseFloat($("#hpd").value)||8;
   const skip=$("#skipWknd").checked;
-  const coAz=$("#coAz").value.trim();
+  const coAz=companyCodeXml($("#coAz").value);
+  const empFormat=$("#empFormat").value;
   const period=$("#period").value.trim();
   const warns=[];
   if(!coAz)warns.push(["c","Codice azienda mancante: l'attributo CodAziendaUfficiale sarà vuoto."]);
@@ -630,7 +644,7 @@ function buildXml(){
   const missType=new Set(),missEmp=new Set();
   for(const r of activeRows()){
     const e=cell(r,"employee").trim(),t=cell(r,"type").trim();
-    const ec=state.emps.get(e)?.code||"",tc=state.types.get(t)?.code||"";
+    const ec=empCodeXml(state.emps.get(e)?.code||"",empFormat),tc=state.types.get(t)?.code||"";
     if(!ec){missEmp.add(e);excl++;continue;}
     if(!tc){missType.add(t);excl++;continue;}
     for(const mv of expand(r,hpd,skip)){
@@ -646,7 +660,7 @@ function buildXml(){
   for(const arr of byEmp.values())arr.sort((a,b)=>a.date.localeCompare(b.date));
   let xml='<?xml version="1.0" encoding="utf-8"?>\n<Fornitura>\n';
   for(const[ec,movs]of[...byEmp.entries()].sort((a,b)=>a[0].localeCompare(b[0]))){
-    xml+=`  <Dipendente CodAziendaUfficiale="${esc(coAz)}" CodDipendenteUfficiale="${esc(empCodeXml(ec))}">\n`;
+    xml+=`  <Dipendente CodAziendaUfficiale="${esc(coAz)}" CodDipendenteUfficiale="${esc(ec)}">\n`;
     xml+=`    <Movimenti GenerazioneAutomaticaDaTeorico="N">\n`;
     for(const m of movs){
       xml+=`      <Movimento>\n`;
